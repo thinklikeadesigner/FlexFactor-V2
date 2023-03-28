@@ -3,8 +3,8 @@
 </script>
 
 <main>
-	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	<h1>Hey you!</h1>
+	<p>Welcome to FlexFactor - the ultimate bulking calculator app designed to help you achieve your muscle-building goals! We're excited to have you on board and can't wait to see the gains you'll make with our personalized recommendations based on your body fat, biological sex, activity level, and strength standards. Let's get ready to flex!</p>
 </main>
 
 <style>
