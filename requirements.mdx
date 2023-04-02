@@ -1,0 +1,50 @@
+I made a requirements doc kinda, green checkmarks mean those things are done
+
+requirements for the fitness app
+
+I want to be able to enter the number of lbs of muscle i want to gain and see how long that takes
+
+I want to see starting and ending body fat percentages
+
+i want to see the ratio of fat to muscle i will gain based on starting bodyfat percentage and calories surplus
+
+i want to know how many calories i need to consume
+
+i want sliders so users can play with their calorie and bf and weight ranges so they can see causal relationships between the values with instant feedback
+
+prereqs:
+
+- bodyweight (user input) ![:white_check_mark:](https://lh6.googleusercontent.com/D5087JIoZJFDC2dNIYAHCQzRs1qdGDLtleq9e0YWZk1gSRXvTLEoFs7Sn97iEUQVNl3DPsro2EG1x-Eh_Am8gxenMzD1QbEyNhbTSdINP5So0967XaR0QiXOjEqKyxKpnavBrB7Y5OWVWZIiMIxk0RU)
+
+- bf% (can be a guess based on images provided, user input) ![:white_check_mark:](https://lh4.googleusercontent.com/W66P4QCFJwErWudWegk2mnUAgTnflS0tlLJnqgjytUt_aOmaba9Q4NfmhOqI-YRTZpIfJwl4W0KiRbh2pbm20kMcTvIZw2A76L67pyX8ZTWP9lfOcoS0MGCjvZLnZoWELUrvYKQWcqyNAH65UvQSCwo)
+
+- gender (user input) ![:white_check_mark:](https://lh5.googleusercontent.com/BY9seSEXgm_1Pi54WY5ex8-5S6AnFrILJ-sLyXSNQd6SQAHLB9SPP3gYj6qykY9XOyW7RQyPE6VCvOus4cKJ-5jdz8smiV-HwLSilDsOO4iLD7DV8VNYIgWQmb32dMvZ77Q2Z57tpaFVE_kkEMz0svY)
+
+- fitness level (calculated) ![:white_check_mark:](https://lh5.googleusercontent.com/LGY5PKuTABa0LdZdPAYMYFdl4iM-VyJZsrgJPVahIljvf4syul3sUEo0HyM2y-idA2Klzwze8xqdX_iIOioU85cYgi_P8ma0JRJ6yQyXkoHp7Z8xTPEdFhiJcSwI7ms7BU_HH8WgX9eQs_FBo6fy-Fk)
+
+- bmr (can be calculated with a formula, or user can get the data from wearable device) ![:white_check_mark:](https://lh3.googleusercontent.com/r0BwzBjf3nZG52x6PlhLtnBP3c2lz7wnVfspQpiaHKYD_2UOzGyTgXRpR1r772An7fYMMP1C1C3_kr71EqG1QnrkFF6ARNPnOAz_8KXGt_blspm9zHbgeWElmCwuerou6YEiZEiISWi7qqdXwKhOiyM)
+
+- macronutrient calculator (bonus calculator, kind of a bonus to put on the results page so users have a starting point) ![:white_check_mark:](https://lh6.googleusercontent.com/cuO_Udtt4g88MsYmsdekMZ3iTpN7ClKy74_XlsuJJnsLw4ZAkZ5QDwkkt2BtIkG44_K5a-wS1NKRpKQliUwKs0r_B6fEtp1Hwp_JV7SScFhZJqPj7UwmF9tzkhBliwSAEVtGW9DVyiDZy14KySVanf4)
+
+- how big of a calorie surplus the user wants +25%, +15%, +10%, +5%, +2.5%  (user input) ![:white_check_mark:](https://lh6.googleusercontent.com/-A2GCQFnAiP1nKpEa66k2KkdcF67cXLM053fhi9ZJgS-THYCRWbvQXEtW50QlmnMydrBkwXCtnSKEmCOkFaZmfchY7Stv8qU1lXV5JFzCMr5CXgQztwzF9fRJOaVjhmsEqQcbRS5aZTA1aPamPpwMa8)
+
+TODOS
+
+-   the bulking calculator, i finished the calculators for the prereqs now we just need to figure out how to put it all together ![:rocket:](https://lh5.googleusercontent.com/3s_7WLAA1hv1sMlsq5ruup3zIufIMoeUNt5mX-P9cZ1zJC-OznXsRkvqgdgkkOoWyKan9CkTFKh1_LupX7ZBRaGeUHtOLViripdvsDpGt15Zv7O0-YPL6enyrQJNQ4tX-J0SN2_h7hITyU8nvRqCVn0)
+
+-   UX/UI (need to hit up zhi when you come back from vacay)
+
+-   code the damn thing
+
+-   ship to prod!! (aka the hackathon) ![:tada:](https://lh5.googleusercontent.com/VDgJAmjoIs3dXP4O1qAgXL_cPvTojJnPQ0whd-2CQISkNrxH5vBDE93qxTkegWljOG6lQLK_21RV8bQ8iex_TDh2ZJ98RBAEUwRRF2_YnBJwNG8nHKebisGJCO8E1ZlHjeJoKNG8evcXq2qcxrzaSuU)
+
+notes:
+
+-   sex/gender is a prereq for fitness level
+
+-   fitness level is a prereq for rate of muscle gain
+
+-   the bmr calculator includes bf% since user can choose based on pic? could also make it only based on age?
+
+-   the activity level on bmr is an optional value (i prefer to pick sedentary and just eat back my exercise calories)
+
