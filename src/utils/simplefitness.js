@@ -1,4 +1,5 @@
 // @ts-nocheck
+
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 // FEMALE TRAINING STATUS CALCULATOR
 
@@ -16,6 +17,7 @@ import stats from './stats.js'
 
 const {femaleStats, maleStats} = stats
 class Fitness {
+
   constructor(stats) {
     this.stats = stats;
 
@@ -53,15 +55,14 @@ class Fitness {
 
 }
 
-const rebecca = new Fitness(femaleStats);
 
-const john = new Fitness(maleStats);
-console.log(rebecca.getLevel("benchPress", 145, 105)) // intermediate
-console.log(rebecca.getLevel("barbellSquat", 145, 155)) // intermediate
-
-console.log(john.getLevel("benchPress", 145, 60)) // beginner
-console.log(john.getLevel("barbellSquat", 145, 100)) // beginner
-
+/**
+ * @param {number} weight
+ * @param {number} height
+ * @param {number} age
+ * @param {string} gender
+ * @param {number | undefined} [bf]
+ */
 function calculateBMR(weight, height, age, gender, bf, activityLevel = 1.2) {
     const weightInKg = weight / 2.20462;
     const heightInCm = height * 2.54;
@@ -92,6 +93,13 @@ console.log(`TDEE: ${tdee} calories`);
 console.log(`Fat mass: ${fatMass} kg`);
 console.log(`Lean mass: ${leanMass} kg`);
 
+/**
+ * @param {number} weight
+ * @param {any} height
+ * @param {any} age
+ * @param {any} gender
+ * @param {any} activityLevel
+ */
 function calculateMacronutrients(weight, height, age, gender, activityLevel) {
     const bmr = calculateBMR(weight, height, age, gender);
     const tdee = calculateTDEE(bmr, activityLevel);
@@ -110,9 +118,13 @@ function calculateMacronutrients(weight, height, age, gender, activityLevel) {
 //     return bmr;
 //   }
   
+  /**
+ * @param {number} bmr
+ * @param {string | number} activityLevel
+ */
   function calculateTDEE(bmr, activityLevel) {
     const activityFactors = {
-      sedentary: 1.2,
+      sedentary: 1.2,       
       lightlyActive: 1.375,
       moderatelyActive: 1.55,
       veryActive: 1.725,
@@ -121,3 +133,7 @@ function calculateMacronutrients(weight, height, age, gender, activityLevel) {
     const tdee = bmr * activityFactors[activityLevel];
     return tdee;
   }
+
+  const rebecca = new Fitness(femaleStats)
+
+  console.log(rebecca.getLevel("benchPress", 145, 105))
