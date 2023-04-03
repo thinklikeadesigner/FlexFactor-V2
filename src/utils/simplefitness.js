@@ -1,27 +1,25 @@
-// @ts-nocheck
+
+
 
 /* eslint-disable @typescript-eslint/ban-ts-comment */
-// FEMALE TRAINING STATUS CALCULATOR
-
-/*
-under 125lbs -> beginner(40 - 80lbs), intermediate(81-120), advanced(121-180)
-
-125 - 155 -> beginner(50 - 90), intermediate(91 - 140), advanced(141-190)
-
-155+ -> beginner(60 - 105), intermediate(106 - 160), advanced(161 - 200)
-
-
-*/
 
 import stats from './stats.js'
 
-const {femaleStats, maleStats} = stats
 class Fitness {
 
-  constructor(stats) {
-    this.stats = stats;
 
-  }
+  /**
+   * @param {string} sex
+   */
+  constructor(sex) {
+    if (sex == "female"){
+    this.stats = stats.femaleStats;
+  } else if (sex == "male"){
+    this.stats = stats.maleStats
+  } else {
+        console.log("invalid sex, using default male")
+    this.stats = stats.maleStats
+  }}
 
   // @ts-ignore
   checkWeightClass(weight) {
@@ -40,9 +38,10 @@ class Fitness {
    getLevel(exercise, weight, oneRepMax) {
     let weightClass = this.checkWeightClass(weight)
 
+    // @ts-ignore
     const section = this.stats[weightClass][exercise];
     if (!section) {
-      return "invalid body part";
+      return "invalid exercise";
     }
   
     const level = Object.keys(section).find((level) => {
@@ -60,17 +59,18 @@ class Fitness {
  * @param {number} weight
  * @param {number} height
  * @param {number} age
- * @param {string} gender
+ * @param {string} sex
  * @param {number | undefined} [bf]
  */
-function calculateBMR(weight, height, age, gender, bf, activityLevel = 1.2) {
+function calculateBMR(weight, height, age, sex, bf, activityLevel = 1.2) {
     const weightInKg = weight / 2.20462;
     const heightInCm = height * 2.54;
+    // @ts-ignore
     const fatMass = weightInKg * bf / 100;
     const leanMass = weightInKg - fatMass;
     
     let bmr;
-    if (gender === 'male') {
+    if (sex === 'male') {
       bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
     } else {
       bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 161;
@@ -97,11 +97,13 @@ console.log(`Lean mass: ${leanMass} kg`);
  * @param {number} weight
  * @param {any} height
  * @param {any} age
- * @param {any} gender
+ * @param {any} sex
  * @param {any} activityLevel
  */
-function calculateMacronutrients(weight, height, age, gender, activityLevel) {
-    const bmr = calculateBMR(weight, height, age, gender);
+// @ts-ignore
+function calculateMacronutrients(weight, height, age, sex, activityLevel) {
+    const bmr = calculateBMR(weight, height, age, sex);
+    // @ts-ignore
     const tdee = calculateTDEE(bmr, activityLevel);
     const protein = Math.round(weight * 2.2);
     const fat = Math.round(tdee * 0.25 / 9);
@@ -109,10 +111,10 @@ function calculateMacronutrients(weight, height, age, gender, activityLevel) {
     return { protein, fat, carb };
   }
   
-//   function calculateBMR(weight, height, age, gender) {
+//   function calculateBMR(weight, height, age, sex) {
 //     const heightInCm = height * 2.54;
 //     const weightInKg = weight / 2.205;
-//     const bmr = gender === 'male'
+//     const bmr = sex === 'male'
 //       ? 88.362 + (13.397 * weightInKg) + (4.799 * heightInCm) - (5.677 * age)
 //       : 447.593 + (9.247 * weightInKg) + (3.098 * heightInCm) - (4.330 * age);
 //     return bmr;
@@ -130,10 +132,14 @@ function calculateMacronutrients(weight, height, age, gender, activityLevel) {
       veryActive: 1.725,
       extraActive: 1.9
     };
+    // @ts-ignore
     const tdee = bmr * activityFactors[activityLevel];
     return tdee;
   }
 
-  const rebecca = new Fitness(femaleStats)
+  const female = new Fitness("female")
+  const male = new Fitness("male")
 
-  console.log(rebecca.getLevel("benchPress", 145, 105))
+  console.log(female.getLevel("benchPress", 145, 105))
+
+  export {female, male}

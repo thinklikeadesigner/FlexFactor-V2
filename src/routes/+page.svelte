@@ -1,15 +1,17 @@
 <script>
-
 </script>
 <svelte:head>
 	<title>Home</title>
 	<meta name="description" content="Svelte demo app" />
 </svelte:head>
-<section>
+
+	
 	<h1>
-		to your new<br />SvelteKit app
+Forms
 	</h1>
-	<h2>
-		try editing <strong>src/routes/+page.svelte</strong>
-	</h2>
-</section>
+<form action="/login" method="POST" >
+<input class="input" type="text" name="user">
+<input type="password" class="input" name="password">
+<button type="submit">Login</button></form>
+<style>
+</style>
