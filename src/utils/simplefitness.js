@@ -5,7 +5,7 @@
 
 import stats from './stats.js'
 
-class Fitness {
+class FitnessLevel {
 
 
   /**
@@ -22,7 +22,7 @@ class Fitness {
   }}
 
   // @ts-ignore
-  checkWeightClass(weight) {
+  _checkWeightClass(weight) {
     let weightClass;
     if (weight < 125) {
       weightClass = 0;
@@ -36,7 +36,7 @@ class Fitness {
 
    // @ts-ignore
    getLevel(exercise, weight, oneRepMax) {
-    let weightClass = this.checkWeightClass(weight)
+    let weightClass = this._checkWeightClass(weight)
 
     // @ts-ignore
     const section = this.stats[weightClass][exercise];
@@ -86,12 +86,6 @@ function calculateBMR(weight, height, age, sex, bf, activityLevel = 1.2) {
     };
   }
 
-  const { bmr, tdee, fatMass, leanMass } = calculateBMR(145, 64, 29, 'female', 22, 1.4);
-
-console.log(`BMR: ${bmr} calories`);
-console.log(`TDEE: ${tdee} calories`);
-console.log(`Fat mass: ${fatMass} kg`);
-console.log(`Lean mass: ${leanMass} kg`);
 
 /**
  * @param {number} weight
@@ -137,9 +131,23 @@ function calculateMacronutrients(weight, height, age, sex, activityLevel) {
     return tdee;
   }
 
-  const female = new Fitness("female")
-  const male = new Fitness("male")
+  const female = new FitnessLevel("female")
+  const male = new FitnessLevel("male")
 
-  console.log(female.getLevel("benchPress", 145, 105))
+  let rebecca = female.getLevel("benchPress", 145, 150)
+
+  console.log(rebecca)
+
+
+  const { bmr, tdee, fatMass, leanMass } = calculateBMR(145, 64, 29, 'female', 22, 1.4);
+console.log(`BMR: ${bmr} calories`);
+console.log(`TDEE: ${tdee} calories`);
+console.log(`Fat mass: ${fatMass} kg`);
+console.log(`Lean mass: ${leanMass} kg`);
+// console.log(female.getLevel("benchPress", 145, 105))
+
 
   export {female, male}
+
+
+
