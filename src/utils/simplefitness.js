@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 
 
 
@@ -74,7 +74,7 @@ class NutritionCalculator {
     } else {
       bmr = 10 * 65.77 + 6.25 * 163 - 5 * 29 - 161;
     }
-    return bmr.toFixed(2);
+    return Number(bmr.toFixed(2));
   }
     // DONT CHANGE 
 /**
@@ -95,8 +95,12 @@ class NutritionCalculator {
     return adjustedBMR;
   }
 
-      // Katch-McArdle formula
-  //KatchMcArdle
+
+    /**Katch-McArdle formula
+ * @param {number} weight - The weight in pounds.
+ * @param {number} bf - The body fat percentage (as a decimal).
+ * @returns {number} The BMR in calories per day.
+   */
     static calculateBMRWithBF2(weight, bf) {
       const leanMass = weight * (1 - bf);
     const bmr = 370 + (21.6 * (leanMass/2.2));
@@ -122,15 +126,21 @@ class NutritionCalculator {
   }
 
   
+/**
+ * notes: 0.7 - 1.4 g protein per lb bodyweight
+ */
+
   /**
-   * @param {number} weight
-   * @param {any} height
-   * @param {any} age
-   * @param {any} sex
-   * @param {any} activityLevel
+ * @param {number} weight - The weight in pounds.
+ * @param {number} height - The height in inches.
+ * @param {number} age - The age in years.
+ * @param {string} sex - The biological sex ('male' or 'female').
+ * @param {number} bf - The body fat percentage (as a decimal).
+ * @param {string | number} activityLevel
+ * @returns {object} mcaros -  protein, fat, carb, calories 
    */
   // @ts-ignore
-  static calculateMacronutrients({bmrFunction, weight, height, age, sex, bf = null, activityLevel}) {
+  static calculateMacronutrients(bmrFunction= 'calculateBMR', weight = 145, height = 64, age = 29, sex = 'female', bf = null, activityLevel = 1.2) {
 let bmr;
 console.log({bf})
 // most accurate 
@@ -152,7 +162,7 @@ if (bmrFunction == 'calculateBMRWithBF1' && bf) {
     const l = this.calculateBMRWithBF2(145, 0.22)
     console.log({tdee})
 
-    const protein = Math.round((weight) * 2.2);
+    const protein = Math.round(weight);
 
     const fat = Math.round(tdee * 0.25 / 9);
     const carb = Math.round((tdee - (protein * 4) - (fat * 9)) / 4);
@@ -163,22 +173,13 @@ if (bmrFunction == 'calculateBMRWithBF1' && bf) {
 
 }
 
-const macros = NutritionCalculator.calculateMacronutrients({bmrFunction: 'calculateBMRWithBF1', weight: 145, height: 64, age: 30,bf: 0.22, sex: 'female',  activityLevel: 'veryActive'});
+const macros = NutritionCalculator.calculateMacronutrients('calculateBMRWithBF1', 145, 64, 30,  'female',0.22, 'sedentary');
 
 console.log(macros)
 
   const female = new FitnessLevel("female")
   const male = new FitnessLevel("male")
 
-
-
-
-//   const { bmr, tdee, fatMass, leanMass } = calculateBMR(145, 64, 29, 'female', 22, 1.4);
-// console.log(`BMR: ${bmr} calories`);
-// console.log(`TDEE: ${tdee} calories`);
-// console.log(`Fat mass: ${fatMass} kg`);
-// console.log(`Lean mass: ${leanMass} kg`);
-// console.log(female.getLevel("benchPress", 145, 105))
 
 
   export {female, male}
