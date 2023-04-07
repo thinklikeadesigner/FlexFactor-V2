@@ -19,3 +19,5 @@ jobs:
       - run: |
           corepack enable
           pnpm --version
+      - name: install
+      - run: pnpm i
