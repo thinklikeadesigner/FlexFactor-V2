@@ -2,6 +2,7 @@ import { fail, type Actions } from '@sveltejs/kit';
 import type { Action, PageServerLoad } from './$types';
 import { clearTodos, getTodos, removeTodo } from '$lib/server/database';
 import { addTodo } from '../../lib/server/database';
+import { female, male } from '../../utils/FitnessLevel';
 
 export const load: PageServerLoad = async () => {
 	const todos = getTodos();
@@ -11,11 +12,20 @@ export const load: PageServerLoad = async () => {
 export const actions: Actions = {
 	addTodo: async ({ request }) => {
 		const formData = await request.formData();
-		const todo = String(formData.get('todo'));
+		const sex = String(formData.get('sex'));
+		const exercise = String(formData.get('exercise'));
+		const weight = Number(formData.get('weight'));
+		const oneRepMax = Number(formData.get('oneRepMax'));
+		let fitness;
+		if (!sex || !exercise || !weight || !oneRepMax) return fail(400, { exercise, missing: false });
 
-		if (!todo) return fail(400, { todo, missing: true });
-
-		addTodo(todo);
+		if (sex === 'female') {
+			fitness = female.getLevel(exercise, weight, oneRepMax);
+			addTodo(fitness);
+		} else {
+			fitness = male.getLevel(exercise, weight, oneRepMax);
+			addTodo(fitness);
+		}
 
 		return { success: true };
 	},
