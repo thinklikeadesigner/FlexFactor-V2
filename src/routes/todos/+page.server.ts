@@ -19,7 +19,7 @@ export const actions: Actions = {
 		let fitness;
 		if (!sex || !exercise || !weight || !oneRepMax) return fail(400, { exercise, missing: false });
 
-		if (sex === 'female') {
+		if (sex == 'female') {
 			fitness = female.getLevel(exercise, weight, oneRepMax);
 			addTodo(fitness);
 		} else {
