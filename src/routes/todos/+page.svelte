@@ -40,7 +40,7 @@
 		</ul>
 
 		<form action="?/addTodo" method="POST" use:enhance={addTodo}>
-			{#if !form?.success}
+			{#if form?.missing}
 				<div class="flex flex-row justify-between">
 					<label class="label" for="sex"
 						><span>sex</span>

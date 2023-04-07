@@ -17,7 +17,7 @@ export const actions: Actions = {
 		const weight = Number(formData.get('weight'));
 		const oneRepMax = Number(formData.get('oneRepMax'));
 		let fitness;
-		if (!sex || !exercise || !weight || !oneRepMax) return fail(400, { exercise, missing: false });
+		if (!sex || !exercise || !weight || !oneRepMax) return fail(400, { exercise, missing: true });
 
 		if (sex == 'female') {
 			fitness = female.getLevel(exercise, weight, oneRepMax);

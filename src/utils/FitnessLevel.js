@@ -36,14 +36,12 @@ class FitnessLevel {
 	 */
 	_checkExercise(str) {
 		const regexbenchPress = /bench\s*press/i;
-		const regexDeadlift = /deadlift/i;
 		const regexSquat = /squat|barbell\s*squat|back\s*squat|front\s*squat/i;
 		const regexPullups = /pull\s*-?\s*ups?/i;
 		const regexHipThrust = /hip\s*thrust/i;
 
 		switch (true) {
-			case regexDeadlift.test(str):
-				return 'The string contains deadlift.';
+
 			case regexbenchPress.test(str):
 				return 'benchPress';
 			case regexSquat.test(str):
