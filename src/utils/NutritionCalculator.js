@@ -1,12 +1,4 @@
-export default class NutritionCalculator {
-	/**
-	 * @param {undefined} [bmrType]
-	 * @param {undefined} [user]
-	 */
-	constructor(bmrType, user) {
-		this.bmrType = bmrType;
-		this.user = user;
-	}
+ class NutritionCalculator {
 
 	// DONT CHANGE
 	/**
@@ -22,7 +14,7 @@ export default class NutritionCalculator {
 		if (sex === 'male') {
 			bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
 		} else {
-			bmr = 10 * 65.77 + 6.25 * 163 - 5 * 29 - 161;
+			bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 161;
 		}
 		return Number(bmr.toFixed(2));
 	}
@@ -38,7 +30,6 @@ export default class NutritionCalculator {
 	 */
 	static calculateBMRWithBF1(weight, height, age, sex, bf) {
 		const leanMass = weight * (1 - bf);
-		const fatMass = weight * bf;
 		const bmrWithoutBF = this.calculateBMR(weight, height, age, sex);
 		const bmrWithBF = bmrWithoutBF * (1 + 0.4 * (bf - 0.25));
 		const adjustedBMR = bmrWithBF + (500 * leanMass) / 454;
@@ -92,7 +83,7 @@ export default class NutritionCalculator {
 	 * @param {string} sex - The biological sex ('male' or 'female').
 	 * @param {number | null} bf - The body fat percentage (as a decimal).
 	 * @param {string } activityLevel
-	 * @returns {object} mcaros -  protein, fat, carb, calories
+	 * @returns {object} macros -  protein, fat, carb, calories
 	 */
 	static calculateMacronutrients(
 		bmrType = 'calculateBMRWithBF1',
@@ -112,9 +103,11 @@ export default class NutritionCalculator {
 		} else {
 			bmr = this.calculateBMR(weight, height, age, sex);
 		}
-
+		
+		// tdee = calculate total daily calorie needs
 		const tdee = Number(this.calculateTDEE(bmr, activityLevel));
 
+		// macro calcculations from tdee
 		const protein = Math.round(weight);
 
 		const fat = Math.round((tdee * 0.25) / 9);
@@ -122,7 +115,10 @@ export default class NutritionCalculator {
 		const calories = protein * 4 + carb * 4 + fat * 9;
 		return { protein, fat, carb, calories };
 	}
+
+
 }
 
-let t = new NutritionCalculator();
-console.log(t);
+
+
+export { NutritionCalculator};

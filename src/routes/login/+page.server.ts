@@ -5,17 +5,22 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = await request.formData();
 
-		const user = String(formData.get('user'));
-		const password = String(formData.get('password'));
+		const age = Number(formData.get('age'));
+		const sex = String(formData.get('sex'));
+		const height = Number(formData.get('height'));
 
 		const errors: Record<string, unknown> = {};
 
-		if (!user || typeof user !== 'string') {
-			errors.user = 'required';
+		if (!age || typeof age !== 'number') {
+			errors.age = 'required';
 		}
 
-		if (!password || typeof password !== 'string') {
-			errors.password = 'required';
+		if (!sex || typeof sex !== 'string') {
+			errors.sex = 'required';
+		}
+
+		if (!height || typeof height !== 'number') {
+			errors.height = 'required';
 		}
 
 		if (Object.keys(errors).length > 0) {

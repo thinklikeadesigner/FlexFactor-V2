@@ -1,6 +1,5 @@
 import stats from './stats.js';
 
-import NutritionCalculator from './NutritionCalculator.js';
 class FitnessLevel {
 	/**
 	 * @param {string} sex
@@ -95,17 +94,8 @@ class FitnessLevel {
 	}
 }
 
-const macros = NutritionCalculator.calculateMacronutrients(
-	'calculateBMRWithBF1',
-	145,
-	64,
-	30,
-	'female',
-	0.22,
-	'sedentary'
-);
 
-console.log(macros);
+
 
 const female = new FitnessLevel('female');
 const male = new FitnessLevel('male');
