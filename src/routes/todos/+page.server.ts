@@ -26,6 +26,7 @@ export const actions: Actions = {
 			fitness = male.getLevel(exercise, weight, oneRepMax);
 			addTodo(fitness);
 		}
+		console.log(fitness);
 
 		return { success: true };
 	},
