@@ -12,12 +12,10 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8.x
-      - run: pnpm --version
+      - run: pnpm --version && pnpm i
       - uses: actions/setup-node@v3
         with:
           node-version: 18.x
       - run: |
           corepack enable
           pnpm --version
-      - name: install
-      - run: pnpm i
