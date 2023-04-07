@@ -7,19 +7,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-
+      - name: Checkout repository
+        uses: actions/checkout@v3
       - uses: pnpm/action-setup@v2
-        name: Install pnpm
-        id: pnpm-install
         with:
           version: 8.x
-          run_install: true
-          path: ./
-
-
-      - name: Install dependencies
-        run: pnpm install
+      - run: pnpm --version
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.x
+      - run: |
+          corepack enable
+          pnpm --version
