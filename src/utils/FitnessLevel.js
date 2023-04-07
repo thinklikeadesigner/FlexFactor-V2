@@ -1,6 +1,6 @@
 import stats from './stats.js';
 
-import NutritionCalculator from './NutritionCalculatorTypescript.js';
+import NutritionCalculator from './NutritionCalculator.js';
 class FitnessLevel {
 	/**
 	 * @param {string} sex
