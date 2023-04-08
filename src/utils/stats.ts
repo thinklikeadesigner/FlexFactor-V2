@@ -1,4 +1,17 @@
-const stats = {
+interface Exercise {
+  [exerciseName: string]: 
+    {
+      beginner : number[];
+      intermediate : number[];
+      advanced : (number | null)[];
+  }
+}
+
+interface Stats {
+	[gender: string] : Exercise[]
+}
+
+const stats: Stats = {
 	femaleStats: [
 	  {
 		benchPress: {

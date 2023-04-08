@@ -1,7 +1,6 @@
 import stats from "./stats";
 
 
-
 const checkWeightClass = (weight: number): number => {
 	let weightClass;
 	if (weight < 125) {
@@ -56,6 +55,6 @@ const getLevel = (sex: string, exercise: string, weight: number, oneRepMax: numb
 
   return level ? level : 'invalid weight';
 }
-}
+
 
 export { checkWeightClass, checkExercise };
