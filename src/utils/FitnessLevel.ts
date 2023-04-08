@@ -41,7 +41,7 @@ const getFitnessLevel = (sex: string, exercise: string, weight: number, oneRepMa
 		return 'invalid exercise';
 	}
 
-	const level = Object.keys(section).find((level) => {
+	const fitnessLevel = Object.keys(section).find((level) => {
 		const [min, max]: (number | null)[] = section[level as keyof Section];
 		if (!min || !max) {
 			console.error('no min or max');
@@ -51,7 +51,7 @@ const getFitnessLevel = (sex: string, exercise: string, weight: number, oneRepMa
 		console.error('unkown error calculating level');
 	});
 
-	return level ? level : 'invalid weight';
+	return fitnessLevel ? fitnessLevel : 'invalid weight';
 };
 
 export { getFitnessLevel };
