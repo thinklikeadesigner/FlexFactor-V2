@@ -1,4 +1,4 @@
-import stats from './stats.js';
+import stats from './stats';
 
 import NutritionCalculator from './NutritionCalculator.js';
 class FitnessLevel {
