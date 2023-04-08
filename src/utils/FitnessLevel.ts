@@ -1,5 +1,4 @@
-import stats from "./stats";
-
+import stats, { type Section } from './stats';
 
 const checkWeightClass = (weight: number): number => {
 	let weightClass;
@@ -33,28 +32,26 @@ const checkExercise = (exerciseName: string): string => {
 	}
 };
 
-const getLevel = (sex: string, exercise: string, weight: number, oneRepMax: number) => {
- 
-  const levelStats = sex === 'female' ? stats.femaleStats : stats.maleStats
-  const weightClass = checkWeightClass(weight);
-  const validatedExercise = checkExercise(exercise);
-  const section = levelStats[weightClass][validatedExercise];
-  if (!section) {
-    return 'invalid exercise';
-  }
+const getFitnessLevel = (sex: string, exercise: string, weight: number, oneRepMax: number) => {
+	const levelStats = sex === 'female' ? stats.femaleStats : stats.maleStats;
+	const weightClass = checkWeightClass(weight);
+	const validatedExercise = checkExercise(exercise);
+	const section = levelStats[weightClass][validatedExercise];
+	if (!section) {
+		return 'invalid exercise';
+	}
 
-  const level = Object.keys(section).find((level) => {
-    const [min, max] = section[level];
-    if (!min || !max) {
-      console.error('no min or max');
-    } else {
-      return oneRepMax >= min && oneRepMax <= max;
-    }
-    console.error('unkown error calculating level');
-  });
+	const level = Object.keys(section).find((level) => {
+		const [min, max]: (number | null)[] = section[level as keyof Section];
+		if (!min || !max) {
+			console.error('no min or max');
+		} else {
+			return oneRepMax >= min && oneRepMax <= max;
+		}
+		console.error('unkown error calculating level');
+	});
 
-  return level ? level : 'invalid weight';
-}
+	return level ? level : 'invalid weight';
+};
 
-
-export { checkWeightClass, checkExercise };
+export { getFitnessLevel };
