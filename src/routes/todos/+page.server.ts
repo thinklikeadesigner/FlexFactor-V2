@@ -3,7 +3,6 @@ import type { Action, PageServerLoad } from './$types';
 import { clearTodos, getTodos, removeTodo } from '$lib/server/database';
 import { addTodo } from '../../lib/server/database';
 import { getFitnessLevel } from '../../utils/FitnessLevel';
-// import { female, male } from '../../utils/FitnessLevel';
 
 export const load: PageServerLoad = async () => {
 	const todos = getTodos();
@@ -21,13 +20,6 @@ export const actions: Actions = {
 
 		const fitness = await getFitnessLevel(sex, exercise, weight, oneRepMax)
 		addTodo(fitness)
-		// if (sex == 'female') {
-		// 	fitness = (exercise, weight, oneRepMax);
-		// 	addTodo(fitness);
-		// } else {
-		// 	fitness = male.getLevel(exercise, weight, oneRepMax);
-		// 	addTodo(fitness);
-		// }
 		console.log(fitness);
 
 		return { success: true };
