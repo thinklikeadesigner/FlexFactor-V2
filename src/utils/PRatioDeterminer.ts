@@ -3,6 +3,9 @@ import { pRatios } from './pRatios';
 interface SurplusHash {
 	[key: number]: string;
 }
+type Sex = 'male' | 'female';
+
+type FitnessLevel = 'beginner' | 'intermediate' | 'advanced';
 
 const surplusTable: SurplusHash = {
 	2.5: 'surplus2',
@@ -23,7 +26,7 @@ const getBodyFatRange = (sex: string, bodyFat: number): string => {
 
 	if (sex === 'male') {
 		if (bodyFat > 4 && bodyFat <= 8) bodyFatrange = 'bf6to8';
-		if (bodyFat > 9 && bodyFat <= 19) bodyFatrange = 'bf9to12';
+		if (bodyFat > 9 && bodyFat <= 13) bodyFatrange = 'bf9to12';
 		if (bodyFat > 13 && bodyFat <= 17) bodyFatrange = 'bf13to17';
 		if (bodyFat > 18) bodyFatrange = 'bf18to22';
 	}
@@ -32,13 +35,15 @@ const getBodyFatRange = (sex: string, bodyFat: number): string => {
 };
 
 export const determinePRatio = (
-	sex: string,
-	calorieSurplus: number,
-	bodyFat: number,
-	fitnessLevel: string
+	sex: Sex = 'male',
+	calorieSurplus = 10,
+	bodyFat = 10,
+	fitnessLevel: FitnessLevel = 'intermediate'
 ): number => {
+  
+	const validatedSex = sex.toLowerCase();
 	const surplusClass = surplusTable[calorieSurplus];
-	const bodyFatrange = getBodyFatRange(sex, bodyFat);
+	const bodyFatrange = getBodyFatRange(validatedSex, bodyFat);
 
-	return pRatios[sex][fitnessLevel][surplusClass][bodyFatrange];
+	return pRatios[validatedSex][fitnessLevel][surplusClass][bodyFatrange] ?? 0;
 };
