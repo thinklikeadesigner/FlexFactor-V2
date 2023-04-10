@@ -1,10 +1,10 @@
-type Todo = {
+type FitnessLevel = {
 	id: number;
 	text: string;
 	completed: boolean;
 };
 
-let todos: Todo[] = [
+let fitnessLevels: FitnessLevel[] = [
 	{
 		id: Date.now(),
 		text: 'Learn how forms work',
@@ -12,24 +12,24 @@ let todos: Todo[] = [
 	}
 ];
 
-export function getTodos() {
-	return todos;
+export function getFitnessLevels() {
+	return fitnessLevels;
 }
 
-export function addTodo(text: string) {
-	const todo: Todo = {
+export function addFitnessLevel(text: string) {
+	const fitnessLevel: FitnessLevel = {
 		id: Date.now(),
 		text,
 		completed: false
 	};
-	todos = [...todos, todo];
+	fitnessLevels = [...fitnessLevels, fitnessLevel];
 }
 
-export function removeTodo(id: number) {
-	todos = todos.filter((todo) => todo.id !== id);
-	return todos;
+export function removeFitnessLevel(id: number) {
+	fitnessLevels = fitnessLevels.filter((fitnessLevel) => fitnessLevel.id !== id);
+	return fitnessLevels;
 }
 
-export function clearTodos() {
-	todos = [];
+export function clearFitnessLevels() {
+	fitnessLevels = [];
 }
