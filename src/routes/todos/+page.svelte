@@ -6,6 +6,7 @@
 	export let form: ActionData;
 
 	let loading = false;
+
 	let error = false;
 
 	const addTodo: SubmitFunction = (input) => {
