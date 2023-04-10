@@ -1,6 +1,10 @@
 <script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms';
-	import type { ActionData, PageData } from './$types';
+	import { enhance } from '$app/forms';
+    import type { ActionData, PageData, SubmitFunction } from './$types';
+
+
+
+
 
 	export let data: PageData;
 	export let form: ActionData;
@@ -41,7 +45,7 @@
 
 		<form action="?/addTodo" method="POST" use:enhance={addTodo}>
 			{#if form?.missing}
-				<div class="flex flex-row justify-between">
+				<div class="flex flex-col justify-between">
 					<label class="label" for="sex"
 						><span>sex</span>
 						<input class="input input-error w-1/2" type="text" name="sex" /></label
@@ -66,7 +70,7 @@
 				</div>
 				<p class="text-error-400">This field is required</p>
 			{:else}
-				<div class="flex flex-row justify-between">
+				<div class="flex flex-col justify-between">
 					<label class="label" for="sex"
 						><span>sex</span>
 						<input class="input w-1/2" type="text" name="sex" /></label
