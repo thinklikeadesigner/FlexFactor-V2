@@ -1,7 +1,7 @@
 <script lang="ts">
   import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { determinePRatio } from '../../utils/PRatioDeterminer';
-  // surplus
+
   let sex ='male';
   let fitnessLevel = 'beginner'
   let calorieSurplus = 10;
