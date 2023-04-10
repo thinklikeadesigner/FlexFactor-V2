@@ -19,7 +19,7 @@
   }
   else{
     bodyFat = 22
-    bodyFatMin = 10;
+    bodyFatMin = 12;
     bodyFatMax = 40;
   }
 
