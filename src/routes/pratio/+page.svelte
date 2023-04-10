@@ -1,6 +1,5 @@
 <script lang="ts">
   import { RangeSlider } from '@skeletonlabs/skeleton';
-	import { each } from 'svelte/internal';
 	import { determinePRatio } from '../../utils/PRatioDeterminer';
   // surplus
   let sex ='male';
@@ -69,7 +68,7 @@ let values: {sex:string, fitnessLevel: string, bodyFat: number, calorieSurplus: 
 <h4>Calorie Surplus</h4>
   <div class="flex items-center">
 		{#each calorieSurplusRange as value}
-    <label><input type="radio" {value} bind:group={calorieSurplus} name="" id="">{value}</label>
+    <label><input type="radio" {value} bind:group={calorieSurplus} name="" id="">{value}%</label>
     {/each}
 
   </div>
