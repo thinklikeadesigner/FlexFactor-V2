@@ -18,7 +18,7 @@ const surplusTable: SurplusHash = {
 const getBodyFatRange = (sex: string, bodyFat: number): string => {
 	let bodyFatrange = '';
 	if (sex === 'female') {
-		if (bodyFat > 10 && bodyFat <= 19) bodyFatrange = 'bf12to19';
+		if (bodyFat > 9 && bodyFat <= 19) bodyFatrange = 'bf12to19';
 		if (bodyFat > 20 && bodyFat <= 24) bodyFatrange = 'bf20to24';
 		if (bodyFat > 25 && bodyFat <= 31) bodyFatrange = 'bf25to35';
 		if (bodyFat > 32) bodyFatrange = 'bf32to40';
@@ -40,10 +40,13 @@ export const determinePRatio = (
 	bodyFat = 10,
 	fitnessLevel: FitnessLevel = 'intermediate'
 ): number => {
-  
-	const validatedSex = sex.toLowerCase();
-	const surplusClass = surplusTable[calorieSurplus];
-	const bodyFatrange = getBodyFatRange(validatedSex, bodyFat);
 
-	return pRatios[validatedSex][fitnessLevel][surplusClass][bodyFatrange] ?? 0;
+
+	const surplusClass = surplusTable[calorieSurplus];
+	const bodyFatrange = getBodyFatRange(sex, bodyFat);
+
+  if(sex === 'female' && bodyFat < 4) return 0;
+  if(sex === 'male' && bodyFat < 2) return 0;
+
+	return pRatios[sex][fitnessLevel][surplusClass][bodyFatrange] ?? 0;
 };
