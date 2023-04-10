@@ -1,4 +1,4 @@
-<script lang="ts">
+2<script lang="ts">
   import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { determinePRatio } from '../../utils/PRatioDeterminer';
 
@@ -20,7 +20,7 @@
   else{
     bodyFat = 22
     bodyFatMin = 10;
-    bodyFatMax = 32;
+    bodyFatMax = 40;
   }
 
 let values: {sex:string, fitnessLevel: string, bodyFat: number, calorieSurplus: number};
