@@ -3,16 +3,18 @@
 	import { calculateTimeToGains } from '../../utils/MuscleGainCalculator';
 
 	let sex = 'male';
-	let startingWeight = 150;
+	$: startingWeight = 150;
 	let fitnessLevel = 'intermediate';
 	let desiredGains = 5;
 
 	let gainsMin = 1;
 	let gainsMax = 25;
 
-	// $: gains =[sex, startingWeight, fitnessLevel, desiredGains]
 	$: timeToGains = calculateTimeToGains(sex, startingWeight, fitnessLevel, desiredGains);
 	$:([minTime, maxtime] = timeToGains)
+
+	$: estimatedMessage = `You should reach your goals in ${minTime} to ${maxtime} months`
+	$: if (!minTime || !maxtime) {estimatedMessage = 'Could not calculate estimate'};
 	
 </script>
 
@@ -26,7 +28,7 @@
 		>
 	</div>
 
-  <label for="weight">Current Weight: <input type="number" bind:value={startingWeight} name="weight" class="text-black">lbs</label>
+  <label for="weight">Current Weight: <input type="number" bind:value={startingWeight} min={80} name="weight" class="text-black">lbs</label>
 	<h4>Fitness Level</h4>
 	<div class="flex items-center">
 		<label for="level">Beginner:</label>
@@ -47,6 +49,6 @@
 	</RangeSlider>
 
 	<div class="gains-output bg-white text-black p-5 my-5 rounded-3xl">
-		<h4>You should achieve your gains in about {minTime} to {maxtime} weeks.</h4>
+		<h4>{estimatedMessage}</h4>
 	</div>
 </form>
