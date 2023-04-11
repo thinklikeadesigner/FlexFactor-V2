@@ -1,7 +1,8 @@
 <script lang="ts">
   import { RangeSlider } from '@skeletonlabs/skeleton';
   import { determinePRatio } from '../../utils/PRatioDeterminer';
-	import GainsCalculator from '../../lib/components/GainsCalculator.svelte';
+	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
+
 
   let sex ='male';
   let fitnessLevel = 'beginner'
