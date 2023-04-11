@@ -1,6 +1,8 @@
-2<script lang="ts">
+<script lang="ts">
   import { RangeSlider } from '@skeletonlabs/skeleton';
-	import { determinePRatio } from '../../utils/PRatioDeterminer';
+  import { determinePRatio } from '../../utils/PRatioDeterminer';
+	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
+
 
   let sex ='male';
   let fitnessLevel = 'beginner'
@@ -28,7 +30,6 @@ let values: {sex:string, fitnessLevel: string, bodyFat: number, calorieSurplus: 
   $: values= {sex, fitnessLevel, bodyFat, calorieSurplus}
 
   let pRatio = 1;
-
   $: pRatio = determinePRatio(sex, calorieSurplus, bodyFat, fitnessLevel);
 
 </script>
@@ -74,11 +75,11 @@ let values: {sex:string, fitnessLevel: string, bodyFat: number, calorieSurplus: 
   </div>
 
 <div class="bg-white text-black p-5 my-5 rounded-3xl">
-  {#each Object.entries(values) as [title, value] }
-    <p>{title}: {value}</p>
-  {/each}
 
   <h2>Your p-ratio:{pRatio}</h2>
 
 </div>
 </form>
+
+
+<GainsCalculator />
