@@ -1,16 +1,18 @@
 import { fail, type Actions } from '@sveltejs/kit';
-import { clearTodos, getTodos, removeTodo } from '$lib/server/database';
-import { addTodo } from '../../lib/server/database';
-import { calculateMacronutrients } from '../../utils/NutritionCalculations';
-('../../utils/NutritionCalculations');
 
-export const load: any = async () => {
-	const todos = getTodos();
-	return { todos };
+import type { Action, PageServerLoad } from './$types';
+import { clearFitnessLevels, getFitnessLevels, removeFitnessLevel } from '$lib/server/fitnessLevel';
+import { addFitnessLevel } from '../../lib/server/fitnessLevel';
+import NutritionCalculator from '../../utils/NutritionCalculatorTypescript';
+
+export const load: PageServerLoad = async () => {
+	const fitnessLevels = getFitnessLevels();
+	return { fitnessLevels };
+
 };
 
 export const actions: Actions = {
-	addTodo: async ({ request }) => {
+	addFitnessLevel: async ({ request }) => {
 		const formData = await request.formData();
 
 		// 	(weight = 145),
@@ -32,19 +34,19 @@ export const actions: Actions = {
 		const results: string = JSON.stringify(
 			calculateMacronutrients(weight, height, age, sex, bf, activityLevel)
 		);
-		addTodo(results);
+		addFitnessLevel(results);
 
 		return { success: true };
 	},
-	removeTodo: async ({ request }) => {
+	removeFitnessLevel: async ({ request }) => {
 		const formData = request.formData();
-		const todoId = Number((await formData).get('id'));
+		const fitnessLevelId = Number((await formData).get('id'));
 
-		removeTodo(todoId);
+		removeFitnessLevel(fitnessLevelId);
 
 		return { success: true };
 	},
-	clearTodos: () => {
-		clearTodos();
+	clearFitnessLevels: () => {
+		clearFitnessLevels();
 	}
 };
