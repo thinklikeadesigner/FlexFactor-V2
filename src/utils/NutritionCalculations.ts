@@ -68,9 +68,5 @@ const calculateMacronutrients = (
 	return { protein, fat, carb, calories };
 };
 
-console.log(calculateMacronutrients());
-console.log(calculateBMR(145, 64, 29, 'female'));
-console.log(calculateBMRWithBF1(145, 64, 29, 'female', 0.22));
-console.log(calculateTDEE(calculateBMR(145, 64, 29, 'female'), 'sedentary'));
 
 export { calculateMacronutrients, calculateTDEE, calculateBMR, calculateBMRWithBF1 };
