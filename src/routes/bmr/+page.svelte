@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { enhance, type SubmitFunction } from '$app/forms';
+	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
 	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
@@ -117,3 +118,6 @@
 		{/if}
 	</div>
 </div>
+
+
+<GainsCalculator />
