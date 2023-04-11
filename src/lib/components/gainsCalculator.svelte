@@ -3,7 +3,7 @@
 	import { calculateTimeToGains } from '../../utils/MuscleGainCalculator';
 
 	let sex = 'male';
-	$: startingWeight = 150;
+	let startingWeight = 150;
 	let fitnessLevel = 'intermediate';
 	let desiredGains = 5;
 

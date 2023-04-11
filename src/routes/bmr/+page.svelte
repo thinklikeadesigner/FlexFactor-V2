@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { enhance, type SubmitFunction } from '$app/forms';
-	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
+	import GainsCalculator from '$lib/components/GainsCalculator.svelte';
 	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
