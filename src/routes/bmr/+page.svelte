@@ -43,10 +43,6 @@
 		<form action="?/addFitnessLevel" method="POST" use:enhance={addFitnessLevel}>
 			{#if form?.missing}
 				<div class="flex flex-row justify-between">
-					<label class="label" for="bmrType"
-						><span>bmrType</span>
-						<input class="input w-1/2" type="text" name="bmrType" /></label
-					>
 					<label class="label" for="weight">
 						<span>weight</span>
 						<input class="input w-1/2" type="text" name="weight" />
