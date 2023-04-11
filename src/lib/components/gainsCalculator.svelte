@@ -28,7 +28,6 @@
 		>
 	</div>
 
-  <label for="weight">Current Weight: <input type="number" bind:value={startingWeight} min={80} name="weight" class="text-black">lbs</label>
 	<h4>Fitness Level</h4>
 	<div class="flex items-center">
 		<label for="level">Beginner:</label>
@@ -41,6 +40,12 @@
 		<input type="radio" name="level" bind:group={fitnessLevel} value="advanced" />
 	</div>
 
+	<RangeSlider name="range-slider" bind:value={startingWeight} min={80} max={300} step={1}>
+		<div class="flex justify-between items-center">
+			<h4>Current Weight</h4>
+			<div class="text-xs">{startingWeight} / {300}</div>
+		</div>
+	</RangeSlider>
 	<RangeSlider name="range-slider" bind:value={desiredGains} min={gainsMin} max={gainsMax} step={1}>
 		<div class="flex justify-between items-center">
 			<h4>Desired Gains</h4>
