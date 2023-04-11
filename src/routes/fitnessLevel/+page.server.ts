@@ -1,16 +1,16 @@
 import { fail, type Actions } from '@sveltejs/kit';
 import type { Action, PageServerLoad } from './$types';
-import { clearTodos, getTodos, removeTodo } from '$lib/server/database';
-import { addTodo } from '../../lib/server/database';
+import { clearFitnessLevels, getFitnessLevels, removeFitnessLevel } from '$lib/server/fitnessLevel';
+import { addFitnessLevel } from '../../lib/server/fitnessLevel';
 import { getFitnessLevel } from '../../utils/FitnessLevel';
 
 export const load: PageServerLoad = async () => {
-	const todos = getTodos();
-	return { todos };
+	const fitnessLevels = getFitnessLevels();
+	return { fitnessLevels };
 };
 
 export const actions: Actions = {
-	addTodo: async ({ request }) => {
+	addFitnessLevel: async ({ request }) => {
 		const formData = await request.formData();
 		const sex = String(formData.get('sex'));
 		const exercise = String(formData.get('exercise'));
@@ -18,21 +18,21 @@ export const actions: Actions = {
 		const oneRepMax = Number(formData.get('oneRepMax'));
 		if (!sex || !exercise || !weight || !oneRepMax) return fail(400, { exercise, missing: true });
 
-		const fitness = await getFitnessLevel(sex, exercise, weight, oneRepMax)
-		addTodo(fitness)
+		const fitness = await getFitnessLevel(sex, exercise, weight, oneRepMax);
+		addFitnessLevel(fitness);
 		console.log(fitness);
 
 		return { success: true };
 	},
-	removeTodo: async ({ request }) => {
+	removeFitnessLevel: async ({ request }) => {
 		const formData = request.formData();
-		const todoId = Number((await formData).get('id'));
+		const fitnessLevelId = Number((await formData).get('id'));
 
-		removeTodo(todoId);
+		removeFitnessLevel(fitnessLevelId);
 
 		return { success: true };
 	},
-	clearTodos: () => {
-		clearTodos();
+	clearFitnessLevels: () => {
+		clearFitnessLevels();
 	}
 };

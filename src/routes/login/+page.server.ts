@@ -30,6 +30,6 @@ export const actions: Actions = {
 			};
 			return fail(400, data);
 		}
-		throw redirect(303, '/todos');
+		throw redirect(303, '/fitnessLevels');
 	}
 };

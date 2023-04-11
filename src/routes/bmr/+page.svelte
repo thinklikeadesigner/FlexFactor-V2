@@ -9,7 +9,7 @@
 	let loading = false;
 	let error = false;
 
-	const addTodo: SubmitFunction = (input) => {
+	const addFitnessLevel: SubmitFunction = (input) => {
 		loading = true;
 		console.log(input);
 		return async ({ update }) => {
@@ -24,13 +24,13 @@
 <div class="py-10">
 	<div class="card p-4">
 		<ul class="list">
-			{#each data.todos as todo}
+			{#each data.fitnessLevels as fitnessLevel}
 				<li class="">
 					<span class="flex-auto capitalize">
-						{todo.text}
+						{fitnessLevel.text}
 					</span>
-					<form action="?/removeTodo" method="POST" use:enhance>
-						<input class="input" type="hidden" name="id" value={todo.id} />
+					<form action="?/removeFitnessLevel" method="POST" use:enhance>
+						<input class="input" type="hidden" name="id" value={fitnessLevel.id} />
 						<button
 							type="submit"
 							class="btn variant-ghost-error text-error-400 m-0 bg-none border-none">DELETE</button
@@ -40,7 +40,7 @@
 			{/each}
 		</ul>
 
-		<form action="?/addTodo" method="POST" use:enhance={addTodo}>
+		<form action="?/addFitnessLevel" method="POST" use:enhance={addFitnessLevel}>
 			{#if form?.missing}
 				<div class="flex flex-row justify-between">
 					<label class="label" for="bmrType"
@@ -70,8 +70,8 @@
 						><span>activityLevel</span>
 						<input class="input w-1/2" type="text" name="activityLevel" />
 					</label>
-					<button class="btn" type="submit"> + Add todo </button>
-					<button type="submit" formaction="?/clearTodos" class="btn"> clear</button>
+					<button class="btn" type="submit"> + Add fitnessLevel </button>
+					<button type="submit" formaction="?/clearFitnessLevels" class="btn"> clear</button>
 				</div>
 				<p class="text-error-400">This field is required</p>
 			{:else}
@@ -107,14 +107,14 @@
 						><span>activityLevel</span>
 						<input class="input input-error w-1/2" type="text" name="activityLevel" />
 					</label>
-					<button class="btn" type="submit"> + Add todo </button>
-					<button type="submit" formaction="?/clearTodos" class="btn"> clear</button>
+					<button class="btn" type="submit"> + Add fitnessLevel </button>
+					<button type="submit" formaction="?/clearFitnessLevels" class="btn"> clear</button>
 				</div>
 			{/if}
 		</form>
 
 		{#if form?.success}
-			<p>Added todo!</p>
+			<p>Added fitnessLevel!</p>
 		{/if}
 	</div>
 </div>
