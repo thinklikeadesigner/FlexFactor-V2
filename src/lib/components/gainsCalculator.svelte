@@ -39,6 +39,8 @@
 		<label for="level">Advanced:</label>
 		<input type="radio" name="level" bind:group={fitnessLevel} value="advanced" />
 	</div>
+  <label for="weight">Current Weight: <input type="number" bind:value={startingWeight} min={80} name="weight" class="text-black">lbs</label>
+
 
 	<RangeSlider name="range-slider" bind:value={startingWeight} min={80} max={300} step={1}>
 		<div class="flex justify-between items-center">
