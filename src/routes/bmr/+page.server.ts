@@ -18,6 +18,7 @@ export const actions: Actions = {
 		// 	(age = 29),
 		// 	(sex = 'female'),
 		// 	(bf = 0.12),
+
 		// 	(activityLevel = 'sedentary');
 
 		const weight = Number(formData.get('weight'));
