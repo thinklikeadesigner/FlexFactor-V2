@@ -5,7 +5,7 @@ const calculateBMR = (weight: number, height: number, age: number, sex: string):
 	if (sex === 'male') {
 		bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age + 5;
 	} else {
-		bmr = 10 * 65.77 + 6.25 * 163 - 5 * 29 - 161;
+		bmr = 10 * weightInKg + 6.25 * heightInCm - 5 * age - 161;
 	}
 	return Number(bmr.toFixed(2));
 };
@@ -68,9 +68,5 @@ const calculateMacronutrients = (
 	return { protein, fat, carb, calories };
 };
 
-console.log(calculateMacronutrients());
-console.log(calculateBMR(145, 64, 29, 'female'));
-console.log(calculateBMRWithBF1(145, 64, 29, 'female', 0.22));
-console.log(calculateTDEE(calculateBMR(145, 64, 29, 'female'), 'sedentary'));
 
 export { calculateMacronutrients, calculateTDEE, calculateBMR, calculateBMRWithBF1 };
