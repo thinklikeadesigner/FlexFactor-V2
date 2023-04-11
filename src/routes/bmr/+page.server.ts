@@ -3,12 +3,11 @@ import { fail, type Actions } from '@sveltejs/kit';
 import type { Action, PageServerLoad } from './$types';
 import { clearFitnessLevels, getFitnessLevels, removeFitnessLevel } from '$lib/server/fitnessLevel';
 import { addFitnessLevel } from '../../lib/server/fitnessLevel';
-import NutritionCalculator from '../../utils/NutritionCalculatorTypescript';
+import { calculateMacronutrients } from '../../utils/NutritionCalculations';
 
 export const load: PageServerLoad = async () => {
 	const fitnessLevels = getFitnessLevels();
 	return { fitnessLevels };
-
 };
 
 export const actions: Actions = {
