@@ -5,7 +5,10 @@ interface MuscleGainRate {
 	};
 }
 
-const muscleGainRates: MuscleGainRate = {
+const PERCENT_TO_DECIMAL = 0.01;
+const ONE_MONTH_IN_WEEKS = 4.345;
+
+const muscleGainRatePercentage: MuscleGainRate = {
 	male: {
 		beginner: [1, 1.5],
 		intermediate: [0.5, 1.0],
@@ -20,7 +23,7 @@ const muscleGainRates: MuscleGainRate = {
 };
 
 const calculateMonthlyGains = (startingWeight: number, gainRate: number) => {
-	return startingWeight * gainRate;
+	return startingWeight * gainRate * PERCENT_TO_DECIMAL;
 };
 
 export const calculateTimeToGains = (
@@ -29,11 +32,13 @@ export const calculateTimeToGains = (
 	fitnessLevel: string,
 	desiredGains: number
 ): number[] => {
-	const gainRates = muscleGainRates[sex][fitnessLevel];
+	const gainRates = muscleGainRatePercentage[sex][fitnessLevel];
 
 	const monthlyGainRates = gainRates.map((rate) => calculateMonthlyGains(startingWeight, rate));
-
-	const timeToGains = monthlyGainRates.map((monthlyGainRate) => desiredGains / monthlyGainRate);
-
-	return timeToGains;
+	
+	// Time to gains is returned in array in the format [worstCaseScenario, bestCaseScenario]
+	const timeToGainsInWeeks = monthlyGainRates.map((monthlyGainRate) => Math.round(desiredGains / monthlyGainRate * ONE_MONTH_IN_WEEKS));
+	
+	// Returning the array in a more usable format.
+	return timeToGainsInWeeks.reverse();
 };
