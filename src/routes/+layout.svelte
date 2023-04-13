@@ -1,6 +1,6 @@
 <script>
 // Your selected Skeleton theme:
-import '../theme.postcss';
+import '@skeletonlabs/skeleton/themes/theme-modern.css';
 // This contains the bulk of Skeletons required styles:
 import '@skeletonlabs/skeleton/styles/all.css';
 // Finally, your application's global stylesheet (sometimes labeled 'app.css')
