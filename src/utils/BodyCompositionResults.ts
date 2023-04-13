@@ -20,9 +20,7 @@ export const calculateBodyComposition = (
     initialBodyFatPercent > 50 ||
     desiredMuscleGain > totalWeightGain
   ) {
-    throw new Error(
-      "Invalid input values"
-    );
+    return 0;
   }
 	const finalWeight = initialBodyWeight + totalWeightGain;
 	const startingFatMass = initialBodyWeight * initialBodyFatPercent * PERCENT_TO_DECIMAL;

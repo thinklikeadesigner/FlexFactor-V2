@@ -32,7 +32,6 @@
 	$: pRatio = determinePRatio(sex, calorieSurplus, bodyFat, fitnessLevel);
 
 
-  console.log(calculateBodyComposition(12, 12, 100, 15))
 </script>
 
 <form action="">
