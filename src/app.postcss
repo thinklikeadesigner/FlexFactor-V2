@@ -1,9 +1,12 @@
-@import '@fontsource/fira-mono';
+@font-face {
+	font-family: 'Anuphan';
+	src: url('/fonts/Anuphan-VariableFont_wght.ttf');
+}
 
 :root {
-	--font-body: Arial, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+	--font-body: 'Anuphan', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
 		Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-	--font-mono: 'Fira Mono', monospace;
+	--font-mono: monospace;
 	--color-bg-0: rgb(202, 216, 228);
 	--color-bg-1: hsl(209, 36%, 86%);
 	--color-bg-2: hsl(224, 44%, 95%);
@@ -12,11 +15,16 @@
 	--color-text: rgba(0, 0, 0, 0.7);
 	--column-width: 42rem;
 	--column-margin-top: 4rem;
+	--theme-rounded-base: 20px;
+	--theme-rounded-container: 4px;
 	font-family: var(--font-body);
+	--theme-font-family-base: 'Anuphan', sans-serif;
+	--theme-font-family-heading: 'Anuphan', sans-serif;
 	color: var(--color-text);
 }
 
 html,
 body {
 	@apply h-full overflow-hidden;
+	@apply bg-surface-50-900-token;
 }
