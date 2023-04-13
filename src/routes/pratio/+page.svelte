@@ -32,7 +32,7 @@
 </script>
 
 <form action="">
-	<h2>Calculate p-ratio</h2>
+	<h2 >Calculate p-ratio</h2>
 	<h4>Sex</h4>
 	<div>
 		<label for="male">Male: <input type="radio" name="sex" bind:group={sex} value="male" /></label>
