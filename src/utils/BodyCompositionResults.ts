@@ -1,27 +1,38 @@
-// total weight gained in lbs
-// inputs: starting body weight, desired muscle gained in lbs, starting bf%
-// p-ratio = Change in fat-free mass / change in total body mass
-// outputs: desired muscle gains, ending body weight, fat gained, ending bf%
+// desiredMuscleGain, totalWeightGain and initialBodyWeight are all calculated in lbs.
 
-// const calculateEndingWeight = (totalWeightGain: number, initialBodyWeight: number) => {
-// 	return totalWeightGain + initialBodyWeight;
-// };
+const PERCENT_TO_DECIMAL = 0.01;
+const DECIMAL_TO_PERCENT = 100;
 
-export const calculateFatGained = (
+export const calculateBodyComposition = (
 	desiredMuscleGain: number,
 	totalWeightGain: number,
 	initialBodyWeight: number,
-	intialBodyFatPercent: number
+	initialBodyFatPercent: number
 ) => {
-	const endingWeight = initialBodyWeight + totalWeightGain;
-	const startingFat = initialBodyWeight * intialBodyFatPercent;
-	const fatGained = endingWeight - initialBodyWeight - desiredMuscleGain;
-	const endingBodyFatPercent = (startingFat + fatGained) / endingWeight;
+
+    if (
+    desiredMuscleGain < 0 ||
+    desiredMuscleGain > 25 ||
+    totalWeightGain < 0 ||
+    totalWeightGain > 100 ||
+    initialBodyWeight < 80 ||
+    initialBodyFatPercent < 0 ||
+    initialBodyFatPercent > 50
+  ) {
+    throw new Error(
+      "Invalid input values"
+    );
+  }
+	const finalWeight = initialBodyWeight + totalWeightGain;
+	const startingFatMass = initialBodyWeight * initialBodyFatPercent * PERCENT_TO_DECIMAL;
+	const fatMassGained = finalWeight - initialBodyWeight - desiredMuscleGain;
+	const endingBodyFatPercent = (startingFatMass + fatMassGained) / finalWeight * DECIMAL_TO_PERCENT;
 
 	return {
 		desiredMuscleGain,
-		endingWeight,
-		fatGained,
-		endingBodyFatPercent
+		endingWeight: Math.round(finalWeight * 100) / 100,
+    fatGained: Math.round(fatMassGained * 100) / 100,
+    endingBodyFatPercent: Math.round(endingBodyFatPercent * 100) / 100,
 	};
 };
+
