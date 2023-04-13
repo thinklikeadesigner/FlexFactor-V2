@@ -12,9 +12,9 @@
 
 	const handleSubmit = () => {
 		if (!name || !age || !currentWeight || !oneRepMax) return;
-		fitnessLevel = getFitnessLevel(sex, exerciseName, currentWeight, oneRepMax)
-		console.log({name, age, sex, currentWeight, exerciseName, oneRepMax, fitnessLevel})
-		console.log(fitnessLevel)
+		fitnessLevel = getFitnessLevel(sex, exerciseName, currentWeight, oneRepMax);
+		console.log({ name, age, sex, currentWeight, exerciseName, oneRepMax, fitnessLevel });
+		console.log(fitnessLevel);
 	};
 
 	const toggleSex = () => {
@@ -26,8 +26,6 @@
 	};
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
-
-
 </script>
 
 <svelte:head>
@@ -70,7 +68,7 @@
 			required
 		/>
 	</label>
-	<h4>Select an exercise and enter your one rep max (1RM)</h4>
+	<h4>Let's determine your fitness level</h4>
 	<RadioGroup>
 		<RadioItem bind:group={exerciseName} name="justify" value={'benchPress'}>Bench Press</RadioItem>
 		<RadioItem bind:group={exerciseName} name="justify" value={'barbellSquat'}
@@ -80,8 +78,12 @@
 		<RadioItem bind:group={exerciseName} name="justify" value={'hipThrust'}>Hip Thrust</RadioItem>
 	</RadioGroup>
 
-	<label for="age" class="flex justify-between items-center"
-		>Max weight for 1 repetition (lbs):
+	<label for="age" class="flex justify-between items-center">
+		{#if exerciseName === 'pullups'}
+			Max number of reps:
+		{:else}
+			Max weight for 1 repetition (lbs):
+		{/if}
 		<input
 			type="number"
 			id="age"
@@ -96,11 +98,13 @@
 	>
 </form>
 
-{#if fitnessLevel === 'invalid weight'}
-	<h4 class="text-center">Your fitness level cannot be determined</h4>
+<h4 class="text-center">
+	{#if fitnessLevel === 'invalid weight'}
+		Your fitness level cannot be determined
 	{:else if fitnessLevel !== ''}
-	<h4 class="text-center">Your fitness level is {fitnessLevel.toUpperCase()}</h4>
-{/if}
+		Your fitness level is {fitnessLevel.toUpperCase()}
+	{/if}
+</h4>
 
 <style>
 </style>
