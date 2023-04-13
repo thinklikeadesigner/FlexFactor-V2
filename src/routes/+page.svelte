@@ -1,13 +1,20 @@
 <script lang="ts">
-	import { SlideToggle } from '@skeletonlabs/skeleton';
+	import { SlideToggle, RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+	import { getFitnessLevel } from '../utils/FitnessLevel';
 
 	let name: string;
 	let age: number;
 	let sex: string = 'male';
 	let currentWeight: number;
+	let exerciseName: string = 'benchPress';
+	let oneRepMax: number;
+	$: fitnessLevel = '';
 
 	const handleSubmit = () => {
-		console.log({ name, age, sex, currentWeight });
+		if (!name || !age || !currentWeight || !oneRepMax) return;
+		fitnessLevel = getFitnessLevel(sex, exerciseName, currentWeight, oneRepMax)
+		console.log({name, age, sex, currentWeight, exerciseName, oneRepMax, fitnessLevel})
+		console.log(fitnessLevel)
 	};
 
 	const toggleSex = () => {
@@ -17,6 +24,10 @@
 			sex = 'male';
 		}
 	};
+
+	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
+
+
 </script>
 
 <svelte:head>
@@ -28,7 +39,7 @@
 
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
 	<label for="name" class="flex justify-between items-center gap-3"
-		>Name <input type="text" id="name" bind:value={name} class="input w-3/5" /></label
+		>Name <input type="text" id="name" bind:value={name} class="input w-3/5" required /></label
 	>
 
 	<label for="age" class="flex justify-between items-center"
@@ -38,26 +49,16 @@
 			id="age"
 			bind:value={age}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			required
 		/>
 	</label>
 
 	<label for="sex" class="flex justify-between items-center"
-		>Sex<div class="w-3/5">
-			<SlideToggle name="sex" on:change={toggleSex}>{sex.toUpperCase()}</SlideToggle>
+		>Sex
+		<div class="w-3/5">
+			<SlideToggle name="sex" on:change={toggleSex}>{sexLabel}</SlideToggle>
 		</div></label
 	>
-
-	<!-- <fieldset class="flex justify-between">
-		<legend class="mb-3 float-left">Sex</legend>
-		<div class="flex justify-between w-3/5">
-			<label for="male">Male: <input type="radio" name="sex" bind:group={sex} value="male" /></label
-			>
-
-			<label for="female"
-				>Female: <input type="radio" name="sex" bind:group={sex} value="female" /></label
-			>
-		</div>
-	</fieldset> -->
 
 	<label for="weight" class="flex justify-between items-center"
 		>Current Weight (lbs)
@@ -66,11 +67,40 @@
 			id="weight"
 			bind:value={currentWeight}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			required
+		/>
+	</label>
+	<h4>Select an exercise and enter your one rep max (1RM)</h4>
+	<RadioGroup>
+		<RadioItem bind:group={exerciseName} name="justify" value={'benchPress'}>Bench Press</RadioItem>
+		<RadioItem bind:group={exerciseName} name="justify" value={'barbellSquat'}
+			>Barbell Squat</RadioItem
+		>
+		<RadioItem bind:group={exerciseName} name="justify" value={'pullups'}>Pull-ups</RadioItem>
+		<RadioItem bind:group={exerciseName} name="justify" value={'hipThrust'}>Hip Thrust</RadioItem>
+	</RadioGroup>
+
+	<label for="age" class="flex justify-between items-center"
+		>Max weight for 1 repetition (lbs):
+		<input
+			type="number"
+			id="age"
+			bind:value={oneRepMax}
+			class="input w-1/4 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			required
 		/>
 	</label>
 
-	<button type="submit" class="btn variant-filled px-8 w-1/2 mt-8 self-center">Start</button>
+	<button type="submit" class="btn variant-filled px-8 w-1/2 mt-8 self-center"
+		>Check My Fitness Level</button
+	>
 </form>
+
+{#if fitnessLevel === 'invalid weight'}
+	<h4 class="text-center">Your fitness level cannot be determined</h4>
+	{:else if fitnessLevel !== ''}
+	<h4 class="text-center">Your fitness level is {fitnessLevel.toUpperCase()}</h4>
+{/if}
 
 <style>
 </style>
