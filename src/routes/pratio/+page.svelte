@@ -2,6 +2,7 @@
 	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { determinePRatio } from '../../utils/PRatioDeterminer';
 	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
+	import UserStore from '../../stores/UserStore';
 
 	let sex = 'male';
 	let fitnessLevel = 'beginner';
@@ -30,6 +31,8 @@
 	let pRatio = 1;
 	$: pRatio = determinePRatio(sex, calorieSurplus, bodyFat, fitnessLevel);
 </script>
+
+<pre>{$UserStore.weight}</pre>
 
 <form action="">
 	<h2>Calculate p-ratio</h2>
