@@ -1,13 +1,15 @@
 <script lang="ts">
-	import { SlideToggle, RadioGroup, RadioItem } from '@skeletonlabs/skeleton';
+	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../utils/FitnessLevel';
 
 	let name: string;
 	let age: number;
 	let sex: string = 'male';
 	let currentWeight: number;
+	let heightInInches: number = 60;
 	let exerciseName: string = 'benchPress';
 	let oneRepMax: number;
+	// let heightInFeetInches: number;
 	$: fitnessLevel = '';
 
 	const handleSubmit = () => {
@@ -24,6 +26,14 @@
 			sex = 'male';
 		}
 	};
+
+	$: heightInFeetInches = convertInchestoFeet(heightInInches)
+
+	const convertInchestoFeet = (heightInInches: number) => {
+		if (heightInInches < 48 ) return;
+		if (heightInInches % 12 === 0) return `${heightInInches / 12} ft`
+		else return `${Math.trunc(heightInInches/12)}ft, ${heightInInches % 12}in`
+	}
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
 </script>
@@ -68,6 +78,15 @@
 			required
 		/>
 	</label>
+
+	<label for="height" class="flex justify-between items-center"
+		>Height
+		<div class="w-3/5 self-left"><RangeSlider name="height" bind:value={heightInInches} min={48} max={96} step={1} class="w-auto">
+				<div class="text-sm">{heightInFeetInches}</div>
+		</RangeSlider>
+	</div>
+	</label>
+
 	<h4>Let's determine your fitness level</h4>
 	<RadioGroup>
 		<RadioItem bind:group={exerciseName} name="justify" value={'benchPress'}>Bench Press</RadioItem>
