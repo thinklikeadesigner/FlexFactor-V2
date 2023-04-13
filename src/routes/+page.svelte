@@ -9,7 +9,6 @@
 	let heightInInches: number = 60;
 	let exerciseName: string = 'benchPress';
 	let oneRepMax: number;
-	// let heightInFeetInches: number;
 	$: fitnessLevel = '';
 
 	const handleSubmit = () => {
@@ -112,7 +111,7 @@
 		/>
 	</label>
 
-	<button type="submit" class="btn variant-filled px-8 w-1/2 mt-8 self-center"
+	<button type="submit" class="btn variant-filled px-8 w-auto mt-8 self-center"
 		>Check My Fitness Level</button
 	>
 </form>

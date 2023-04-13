@@ -9,7 +9,7 @@ import '../app.postcss';
 
 </script>
 
-<section class="container w-10/12 flex flex-col justify-center items-center m-auto pt-10">
+<section class="container w-11/12 flex flex-col justify-center items-center m-auto pt-10">
 <AppShell>
 	<slot />
 </AppShell>
