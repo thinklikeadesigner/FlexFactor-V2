@@ -2,7 +2,7 @@
 	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { determinePRatio } from '../../utils/PRatioDeterminer';
 	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
-	import { calculateBodyComposition } from '../../utils/BodyCompositionResults';
+	import UserStore from '../../stores/UserStore';
 
 	let sex = 'male';
 	let fitnessLevel = 'beginner';
@@ -30,12 +30,12 @@
 
 	let pRatio = 1;
 	$: pRatio = determinePRatio(sex, calorieSurplus, bodyFat, fitnessLevel);
-
-
 </script>
 
+<pre>{$UserStore.weight}</pre>
+
 <form action="">
-	<h2>Calculate p-ratio</h2>
+	<h2 >Calculate p-ratio</h2>
 	<h4>Sex</h4>
 	<div>
 		<label for="male">Male: <input type="radio" name="sex" bind:group={sex} value="male" /></label>
