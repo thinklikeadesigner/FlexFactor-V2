@@ -6,6 +6,7 @@ import '@skeletonlabs/skeleton/styles/all.css';
 // Finally, your application's global stylesheet (sometimes labeled 'app.css')
 import '../app.postcss';
 	import { AppShell } from "@skeletonlabs/skeleton";
+	import Footer from '$lib/components/Footer.svelte';
 
 </script>
 
@@ -14,5 +15,5 @@ import '../app.postcss';
 	<slot />
 </AppShell>
 </section>
-<style>
-</style>
+
+<Footer />
