@@ -1,8 +1,6 @@
 <script lang="ts">
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../utils/FitnessLevel';
-	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
-	import UserStore from '../stores/UserStore';
 
 	let name: string;
 	let age: number;
@@ -21,14 +19,14 @@
 	};
 
 	const toggleSex = () => {
-		if ($UserStore.sex === 'male') {
-			$UserStore.sex = 'female';
-		} else if ($UserStore.sex === 'female') {
-			$UserStore.sex = 'male';
+		if (sex === 'male') {
+			sex = 'female';
+		} else if (sex === 'female') {
+			sex = 'male';
 		}
 	};
 
-	$: heightInFeetInches = convertInchestoFeet($UserStore.heightInInches);
+	$: heightInFeetInches = convertInchestoFeet(heightInInches);
 
 	const convertInchestoFeet = (heightInInches: number) => {
 		if (heightInInches < 48) return;
@@ -36,7 +34,7 @@
 		else return `${Math.trunc(heightInInches / 12)}ft, ${heightInInches % 12}in`;
 	};
 
-	$: sexLabel = `${$UserStore.sex.charAt(0).toUpperCase()}${$UserStore.sex.slice(1)}`;
+	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
 </script>
 
 <svelte:head>
@@ -45,12 +43,16 @@
 </svelte:head>
 
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
+	<label for="name" class="flex justify-between items-center gap-3"
+		>Name <input type="text" id="name" bind:value={name} class="input w-3/5" required /></label
+	>
+
 	<label for="age" class="flex justify-between items-center"
 		>Age
 		<input
 			type="number"
 			id="age"
-			bind:value={$UserStore.age}
+			bind:value={age}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -68,7 +70,7 @@
 		<input
 			type="number"
 			id="weight"
-			bind:value={$UserStore.currentWeight}
+			bind:value={currentWeight}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -79,7 +81,7 @@
 		<div class="w-3/5 self-left">
 			<RangeSlider
 				name="height"
-				bind:value={$UserStore.heightInInches}
+				bind:value={heightInInches}
 				min={48}
 				max={96}
 				step={1}
@@ -127,7 +129,6 @@
 		Your fitness level is {fitnessLevel.toUpperCase()}
 	{/if}
 </h4>
-<GainsCalculator />
 
 <style>
 </style>
