@@ -25,13 +25,13 @@ export const calculateBodyComposition = (
 	const finalWeight = initialBodyWeight + totalWeightGain;
 	const startingFatMass = initialBodyWeight * initialBodyFatPercent * PERCENT_TO_DECIMAL;
 	const fatMassGained = finalWeight - initialBodyWeight - desiredMuscleGain;
-	const endingBodyFatPercent = (startingFatMass + fatMassGained) / finalWeight * DECIMAL_TO_PERCENT;
+	const endingBodyFatPercent =
+		((startingFatMass + fatMassGained) / finalWeight) * DECIMAL_TO_PERCENT;
 
 	return {
     totalWeightGain: Math.round(totalWeightGain * 100) / 100,
 		endingWeight: Math.round(finalWeight * 100) / 100,
-    fatGained: Math.round(fatMassGained * 100) / 100,
-    endingBodyFatPercent: Math.round(endingBodyFatPercent * 100) / 100,
+		fatGained: Math.round(fatMassGained * 100) / 100,
+		endingBodyFatPercent: Math.round(endingBodyFatPercent * 100) / 100
 	};
 };
-

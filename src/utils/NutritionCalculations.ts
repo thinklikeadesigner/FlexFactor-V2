@@ -68,5 +68,4 @@ const calculateMacronutrients = (
 	return { protein, fat, carb, calories };
 };
 
-
 export { calculateMacronutrients, calculateTDEE, calculateBMR, calculateBMRWithBF1 };
