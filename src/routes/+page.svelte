@@ -1,39 +1,36 @@
 <script lang="ts">
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../utils/FitnessLevel';
+	import UserStore from '../stores/UserStore';
 
-
-	let name: string;
-	let age: number;
-	let sex: string = 'male';
-	let currentWeight: number;
-	let heightInInches: number = 60;
-	let exerciseName: string = 'benchPress';
-	let oneRepMax: number;
-	$: fitnessLevel = '';
+	let sex: string = $UserStore.sex;
 
 	const handleSubmit = () => {
-		if (!name || !age || !currentWeight || !oneRepMax) return;
-		fitnessLevel = getFitnessLevel(sex, exerciseName, currentWeight, oneRepMax);
-		console.log({ name, age, sex, currentWeight, exerciseName, oneRepMax, fitnessLevel });
-		console.log(fitnessLevel);
+		$UserStore.fitnessLevel = fitnessLevel;
 	};
 
 	const toggleSex = () => {
 		if (sex === 'male') {
 			sex = 'female';
+			$UserStore.sex = sex;
 		} else if (sex === 'female') {
 			sex = 'male';
+			$UserStore.sex = sex;
 		}
 	};
-
-	$: heightInFeetInches = convertInchestoFeet(heightInInches)
+	$: fitnessLevel = getFitnessLevel(
+		$UserStore.sex,
+		$UserStore.exerciseName,
+		$UserStore.currentWeight,
+		$UserStore.oneRepMax
+	);
+	$: heightInFeetInches = convertInchestoFeet($UserStore.heightInInches);
 
 	const convertInchestoFeet = (heightInInches: number) => {
-		if (heightInInches < 48 ) return;
-		if (heightInInches % 12 === 0) return `${heightInInches / 12} ft`
-		else return `${Math.trunc(heightInInches/12)}ft, ${heightInInches % 12}in`
-	}
+		if (heightInInches < 48) return;
+		if (heightInInches % 12 === 0) return `${heightInInches / 12} ft`;
+		else return `${Math.trunc(heightInInches / 12)}ft, ${heightInInches % 12}in`;
+	};
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
 </script>
@@ -43,18 +40,13 @@
 	<meta name="description" content="Science-based Gains Calculator" />
 </svelte:head>
 
-
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
-	<label for="name" class="flex justify-between items-center gap-3"
-		>Name <input type="text" id="name" bind:value={name} class="input w-3/5" required /></label
-	>
-
 	<label for="age" class="flex justify-between items-center"
 		>Age
 		<input
 			type="number"
 			id="age"
-			bind:value={age}
+			bind:value={$UserStore.age}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -72,7 +64,7 @@
 		<input
 			type="number"
 			id="weight"
-			bind:value={currentWeight}
+			bind:value={$UserStore.currentWeight}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -80,24 +72,38 @@
 
 	<label for="height" class="flex justify-between items-center"
 		>Height
-		<div class="w-3/5 self-left"><RangeSlider name="height" bind:value={heightInInches} min={48} max={96} step={1} class="w-auto">
+		<div class="w-3/5 self-left">
+			<RangeSlider
+				name="height"
+				bind:value={$UserStore.heightInInches}
+				min={48}
+				max={96}
+				step={1}
+				class="w-auto"
+			>
 				<div class="text-sm">{heightInFeetInches}</div>
-		</RangeSlider>
-	</div>
+			</RangeSlider>
+		</div>
 	</label>
 
 	<h4>Let's determine your fitness level</h4>
 	<RadioGroup>
-		<RadioItem bind:group={exerciseName} name="justify" value={'benchPress'}>Bench Press</RadioItem>
-		<RadioItem bind:group={exerciseName} name="justify" value={'barbellSquat'}
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'benchPress'}
+			>Bench Press</RadioItem
+		>
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'barbellSquat'}
 			>Barbell Squat</RadioItem
 		>
-		<RadioItem bind:group={exerciseName} name="justify" value={'pullups'}>Pull-ups</RadioItem>
-		<RadioItem bind:group={exerciseName} name="justify" value={'hipThrust'}>Hip Thrust</RadioItem>
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'pullups'}
+			>Pull-ups</RadioItem
+		>
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'hipThrust'}
+			>Hip Thrust</RadioItem
+		>
 	</RadioGroup>
 
 	<label for="age" class="flex justify-between items-center">
-		{#if exerciseName === 'pullups'}
+		{#if $UserStore.exerciseName === 'pullups'}
 			Max number of reps:
 		{:else}
 			Max weight for 1 repetition (lbs):
@@ -105,7 +111,7 @@
 		<input
 			type="number"
 			id="age"
-			bind:value={oneRepMax}
+			bind:value={$UserStore.oneRepMax}
 			class="input w-1/4 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
