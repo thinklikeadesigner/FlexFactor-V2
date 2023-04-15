@@ -7,7 +7,6 @@
 
 	const handleSubmit = () => {
 		$UserStore.fitnessLevel = fitnessLevel;
-		console.log($UserStore.fitnessLevel);
 	};
 
 	const toggleSex = () => {

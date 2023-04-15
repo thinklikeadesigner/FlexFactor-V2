@@ -2,17 +2,21 @@
 	import { UserStore } from './../../stores/UserStore';
 	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../utils/MuscleGainCalculator';
-
-	let desiredGains = 2;
+	import { getFitnessLevel } from '../../utils/FitnessLevel';
 
 	let gainsMin = 1;
 	let gainsMax = 25;
-
+	$: fitnessLevel = getFitnessLevel(
+		$UserStore.sex,
+		$UserStore.exerciseName,
+		$UserStore.currentWeight,
+		$UserStore.oneRepMax
+	);
 	$: timeToGains = calculateTimeToGains(
 		$UserStore.sex,
 		$UserStore.currentWeight,
-		$UserStore.fitnessLevel,
-		desiredGains
+		fitnessLevel,
+		$UserStore.desiredGains
 	);
 	$: [minTime, maxtime] = timeToGains;
 
@@ -23,29 +27,6 @@
 </script>
 
 <form action="">
-	<h4>Sex</h4>
-
-	<div>
-		<label for="male"
-			>Male: <input type="radio" name="sex" bind:group={$UserStore.sex} value="male" /></label
-		>
-
-		<label for="female"
-			>Female: <input type="radio" name="sex" bind:group={$UserStore.sex} value="female" /></label
-		>
-	</div>
-
-	<h4>Fitness Level</h4>
-	<div class="flex items-center">
-		<label for="level">Beginner:</label>
-		<input type="radio" name="level" bind:group={$UserStore.fitnessLevel} value="beginner" />
-
-		<label for="level">Intermediate:</label>
-		<input type="radio" name="level" bind:group={$UserStore.fitnessLevel} value="intermediate" />
-
-		<label for="level">Advanced:</label>
-		<input type="radio" name="level" bind:group={$UserStore.fitnessLevel} value="advanced" />
-	</div>
 	<label for="weight"
 		>Current Weight: <input
 			type="number"
@@ -85,4 +66,3 @@
 		<h4>{estimatedMessage}</h4>
 	</div>
 </form>
-<pre>{JSON.stringify($UserStore)}</pre>
