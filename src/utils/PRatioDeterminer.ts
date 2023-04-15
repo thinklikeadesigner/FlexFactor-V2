@@ -37,9 +37,6 @@ export const determinePRatio = (
 	bodyFat = 10,
 	fitnessLevel = 'intermediate'
 ): number => {
-	
-
-
 	const surplusClass = surplusTable[calorieSurplus];
 	const bodyFatrange = getBodyFatRange(sex, bodyFat);
 

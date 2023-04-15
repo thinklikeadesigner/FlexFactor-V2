@@ -32,7 +32,12 @@ const checkExercise = (exerciseName: string): string => {
 	}
 };
 
-const getFitnessLevel = (sex: string, exercise: string, weight: number, oneRepMax: number): string => {
+const getFitnessLevel = (
+	sex: string,
+	exercise: string,
+	weight: number,
+	oneRepMax: number
+): string => {
 	const levelStats = sex === 'female' ? stats.femaleStats : stats.maleStats;
 	const weightClass = checkWeightClass(weight);
 	const validatedExercise = checkExercise(exercise);
@@ -42,7 +47,7 @@ const getFitnessLevel = (sex: string, exercise: string, weight: number, oneRepMa
 	}
 
 	const fitnessLevel = Object.keys(section).find((level) => {
-		const [min, max]: number [] = section[level as keyof Section];
+		const [min, max]: number[] = section[level as keyof Section];
 		if (!min || !max) {
 			console.error('no min or max');
 		} else {
