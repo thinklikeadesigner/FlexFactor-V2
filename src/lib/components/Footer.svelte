@@ -8,7 +8,7 @@
 </script>
 
 <footer
-	class="container w-11/12 justify-center gap-2 flex items-center m-auto py-10 sticky top-[100vh]"
+	class="container w-11/12 justify-center gap-2 flex items-center m-auto py-10 sticky top-[100vh] z-10"
 >
 	FlexFactor &copy; {year}
 	{#each developers as {linkedIn, name}}
