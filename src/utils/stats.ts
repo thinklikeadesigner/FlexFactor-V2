@@ -16,7 +16,7 @@ const stats: Stats = {
 	femaleStats: [
 		{
 			benchPress: {
-				beginner: [40, 80],
+				beginner: [0, 80],
 				intermediate: [81, 120],
 				advanced: [121, Infinity]
 			},
@@ -26,19 +26,19 @@ const stats: Stats = {
 				advanced: [11, Infinity]
 			},
 			barbellSquat: {
-				beginner: [50, 120],
+				beginner: [0, 120],
 				intermediate: [121, 180],
 				advanced: [181, Infinity]
 			},
 			hipThrust: {
-				beginner: [45, 155],
+				beginner: [0, 155],
 				intermediate: [156, 205],
 				advanced: [206, Infinity]
 			}
 		},
 		{
 			benchPress: {
-				beginner: [50, 90],
+				beginner: [0, 90],
 				intermediate: [91, 140],
 				advanced: [141, Infinity]
 			},
@@ -48,19 +48,19 @@ const stats: Stats = {
 				advanced: [11, Infinity]
 			},
 			barbellSquat: {
-				beginner: [60, 140],
+				beginner: [0, 140],
 				intermediate: [141, 205],
 				advanced: [206, Infinity]
 			},
 			hipThrust: {
-				beginner: [45, 180],
+				beginner: [0, 180],
 				intermediate: [181, 240],
 				advanced: [241, Infinity]
 			}
 		},
 		{
 			benchPress: {
-				beginner: [60, 105],
+				beginner: [0, 105],
 				intermediate: [106, 160],
 				advanced: [161, Infinity]
 			},
@@ -70,12 +70,12 @@ const stats: Stats = {
 				advanced: [11, Infinity]
 			},
 			barbellSquat: {
-				beginner: [60, 160],
+				beginner: [0, 160],
 				intermediate: [161, 230],
 				advanced: [231, Infinity]
 			},
 			hipThrust: {
-				beginner: [45, 210],
+				beginner: [0, 210],
 				intermediate: [211, 270],
 				advanced: [271, Infinity]
 			}
@@ -84,7 +84,7 @@ const stats: Stats = {
 	maleStats: [
 		{
 			benchPress: {
-				beginner: [100, 175],
+				beginner: [0, 175],
 				intermediate: [176, 210],
 				advanced: [121, Infinity]
 			},
@@ -94,19 +94,19 @@ const stats: Stats = {
 				advanced: [101, Infinity]
 			},
 			barbellSquat: {
-				beginner: [120, 195],
+				beginner: [0, 195],
 				intermediate: [196, 290],
 				advanced: [291, Infinity]
 			},
 			hipThrust: {
-				beginner: [85, 215],
+				beginner: [0, 215],
 				intermediate: [216, 305],
 				advanced: [306, Infinity]
 			}
 		},
 		{
 			benchPress: {
-				beginner: [100, 205],
+				beginner: [0, 205],
 				intermediate: [206, 240],
 				advanced: [241, Infinity]
 			},
@@ -116,19 +116,19 @@ const stats: Stats = {
 				advanced: [101, Infinity]
 			},
 			barbellSquat: {
-				beginner: [130, 225],
+				beginner: [0, 225],
 				intermediate: [226, 335],
 				advanced: [336, Infinity]
 			},
 			hipThrust: {
-				beginner: [95, 250],
+				beginner: [0, 250],
 				intermediate: [251, 350],
 				advanced: [351, Infinity]
 			}
 		},
 		{
 			benchPress: {
-				beginner: [100, 230],
+				beginner: [0, 230],
 				intermediate: [231, 275],
 				advanced: [276, Infinity]
 			},
@@ -138,12 +138,12 @@ const stats: Stats = {
 				advanced: [101, Infinity]
 			},
 			barbellSquat: {
-				beginner: [140, 250],
+				beginner: [0, 250],
 				intermediate: [251, 375],
 				advanced: [376, Infinity]
 			},
 			hipThrust: {
-				beginner: [110, 280],
+				beginner: [0, 280],
 				intermediate: [281, 400],
 				advanced: [401, Infinity]
 			}
