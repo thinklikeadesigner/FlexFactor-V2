@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../utils/FitnessLevel';
+	import UserStore from '../stores/UserStore';
 
 	let name: string;
 	let age: number;
@@ -43,10 +44,6 @@
 </svelte:head>
 
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
-	<label for="name" class="flex justify-between items-center gap-3"
-		>Name <input type="text" id="name" bind:value={name} class="input w-3/5" required /></label
-	>
-
 	<label for="age" class="flex justify-between items-center"
 		>Age
 		<input
@@ -129,6 +126,7 @@
 		Your fitness level is {fitnessLevel.toUpperCase()}
 	{/if}
 </h4>
+<pre>{JSON.stringify($UserStore)}</pre>
 
 <style>
 </style>
