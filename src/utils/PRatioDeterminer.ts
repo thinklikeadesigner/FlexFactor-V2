@@ -17,7 +17,7 @@ const getBodyFatRange = (sex: string, bodyFat: number): string => {
 	if (sex === 'female') {
 		if (bodyFat > 9 && bodyFat <= 19) bodyFatrange = 'bf12to19';
 		if (bodyFat >= 20 && bodyFat <= 24) bodyFatrange = 'bf20to24';
-		if (bodyFat >= 25 && bodyFat <= 31) bodyFatrange = 'bf25to31';
+		if (bodyFat >= 25 && bodyFat <= 31) bodyFatrange = 'bf25to35';
 		if (bodyFat >= 32) bodyFatrange = 'bf32to40';
 	}
 
