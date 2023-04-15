@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../utils/FitnessLevel';
-
+	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
+	import UserStore from '../stores/UserStore';
 
 	let name: string;
 	let age: number;
@@ -20,22 +21,22 @@
 	};
 
 	const toggleSex = () => {
-		if (sex === 'male') {
-			sex = 'female';
-		} else if (sex === 'female') {
-			sex = 'male';
+		if ($UserStore.sex === 'male') {
+			$UserStore.sex = 'female';
+		} else if ($UserStore.sex === 'female') {
+			$UserStore.sex = 'male';
 		}
 	};
 
-	$: heightInFeetInches = convertInchestoFeet(heightInInches)
+	$: heightInFeetInches = convertInchestoFeet($UserStore.heightInInches);
 
 	const convertInchestoFeet = (heightInInches: number) => {
-		if (heightInInches < 48 ) return;
-		if (heightInInches % 12 === 0) return `${heightInInches / 12} ft`
-		else return `${Math.trunc(heightInInches/12)}ft, ${heightInInches % 12}in`
-	}
+		if (heightInInches < 48) return;
+		if (heightInInches % 12 === 0) return `${heightInInches / 12} ft`;
+		else return `${Math.trunc(heightInInches / 12)}ft, ${heightInInches % 12}in`;
+	};
 
-	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
+	$: sexLabel = `${$UserStore.sex.charAt(0).toUpperCase()}${$UserStore.sex.slice(1)}`;
 </script>
 
 <svelte:head>
@@ -43,18 +44,13 @@
 	<meta name="description" content="Science-based Gains Calculator" />
 </svelte:head>
 
-
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
-	<label for="name" class="flex justify-between items-center gap-3"
-		>Name <input type="text" id="name" bind:value={name} class="input w-3/5" required /></label
-	>
-
 	<label for="age" class="flex justify-between items-center"
 		>Age
 		<input
 			type="number"
 			id="age"
-			bind:value={age}
+			bind:value={$UserStore.age}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -72,7 +68,7 @@
 		<input
 			type="number"
 			id="weight"
-			bind:value={currentWeight}
+			bind:value={$UserStore.currentWeight}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -80,10 +76,18 @@
 
 	<label for="height" class="flex justify-between items-center"
 		>Height
-		<div class="w-3/5 self-left"><RangeSlider name="height" bind:value={heightInInches} min={48} max={96} step={1} class="w-auto">
+		<div class="w-3/5 self-left">
+			<RangeSlider
+				name="height"
+				bind:value={$UserStore.heightInInches}
+				min={48}
+				max={96}
+				step={1}
+				class="w-auto"
+			>
 				<div class="text-sm">{heightInFeetInches}</div>
-		</RangeSlider>
-	</div>
+			</RangeSlider>
+		</div>
 	</label>
 
 	<h4>Let's determine your fitness level</h4>
@@ -123,6 +127,7 @@
 		Your fitness level is {fitnessLevel.toUpperCase()}
 	{/if}
 </h4>
+<GainsCalculator />
 
 <style>
 </style>
