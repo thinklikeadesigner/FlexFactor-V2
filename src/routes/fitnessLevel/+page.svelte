@@ -1,26 +1,30 @@
 <script lang="ts">
-	import { enhance, type SubmitFunction } from '$app/forms';
+	// import { enhance, type SubmitFunction } from '$app/forms';
+	import BodyComposition from '$lib/components/BodyComposition.svelte';
 	import type { ActionData, PageData } from './$types';
 
-	export let data: PageData;
-	export let form: ActionData;
+	// export let data: PageData;
+	// export let form: ActionData;
 
-	let loading = false;
+	// let loading = false;
 
-	let error = false;
+	// let error = false;
 
-	const addFitnessLevel: SubmitFunction = (input) => {
-		loading = true;
-		console.log(input);
-		return async ({ update }) => {
-			loading = false;
-			console.log(loading);
-			await update();
-		};
-	};
+	// const addFitnessLevel: SubmitFunction = (input) => {
+	// 	loading = true;
+	// 	console.log(input);
+	// 	return async ({ update }) => {
+	// 		loading = false;
+	// 		console.log(loading);
+	// 		await update();
+	// 	};
+	// };
 </script>
 
-<pre>{JSON.stringify(data, null, 2)}</pre>
+
+<BodyComposition />
+
+<!-- <pre>{JSON.stringify(data, null, 2)}</pre>
 <div class="py-10">
 	<div class="card p-4">
 		<ul class="list">
@@ -93,4 +97,4 @@
 			<p>Added fitnessLevel!</p>
 		{/if}
 	</div>
-</div>
+</div> -->
