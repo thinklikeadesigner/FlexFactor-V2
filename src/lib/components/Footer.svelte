@@ -19,8 +19,8 @@
 		{#each developers as { linkedIn, name, github }}
 		<div class="flex justify-center items-center">
 			<p class="unstyled text-sm">{name}</p>
-			<a href={github} class="h-7" target="_blank" rel="noreferrer"><img src="/images/github.png" class="h-full" alt="GitHub Icon"></a>
-			<a href={linkedIn} class="h-7" target="_blank" rel="noreferrer"><img src="/images/linkedin.png" class="h-full" alt="GitHub Icon"></a>
+			<a href={github} class="h-7 hover:scale-110" target="_blank" rel="noreferrer"><img src="/images/github.png" class="h-full" alt="GitHub Icon"></a>
+			<a href={linkedIn} class="h-7 hover:scale-110" target="_blank" rel="noreferrer"><img src="/images/linkedin.png" class="h-full" alt="GitHub Icon"></a>
 		</div>
 		{/each}
 	</div>
