@@ -2,6 +2,7 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../utils/FitnessLevel';
 
+
 	let name: string;
 	let age: number;
 	let sex: string = 'male';
@@ -42,7 +43,6 @@
 	<meta name="description" content="Science-based Gains Calculator" />
 </svelte:head>
 
-<h1 class="text-center">Flex Factor 💪🏼</h1>
 
 <form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
 	<label for="name" class="flex justify-between items-center gap-3"
