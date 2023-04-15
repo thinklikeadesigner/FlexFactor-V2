@@ -48,7 +48,7 @@ const getFitnessLevel = (
 
 	const fitnessLevel = Object.keys(section).find((level) => {
 		const [min, max]: number[] = section[level as keyof Section];
-		if (!min || !max) {
+		if (min === null || max === null || min === undefined || max === undefined) {
 			console.error('no min or max');
 		} else {
 			return oneRepMax >= min && oneRepMax <= max;
