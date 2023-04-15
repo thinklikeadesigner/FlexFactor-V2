@@ -6,7 +6,11 @@ import '@skeletonlabs/skeleton/styles/all.css';
 // Finally, your application's global stylesheet (sometimes labeled 'app.css')
 import '../app.postcss';
 	import { AppShell } from "@skeletonlabs/skeleton";
+
+	import Footer from '$lib/components/Footer.svelte';
+
 	import Header from '$lib/components/Header.svelte';
+
 
 </script>
 <Header />
@@ -15,8 +19,13 @@ import '../app.postcss';
 	<slot />
 </AppShell>
 </section>
+
+
+<Footer />
+
 <div class="hero absolute h-full w-full top-0 opacity-30 z-[2] bg-no-repeat bg-cover bg-center bg-hero"></div>
 
 <style>
 	
 </style>
+
