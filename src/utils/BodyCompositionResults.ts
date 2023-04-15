@@ -8,7 +8,7 @@ export const calculateBodyComposition = (
 	desiredMuscleGain: number,
 	initialBodyWeight: number,
 	initialBodyFatPercent: number
-) => {
+):{ totalWeightGain: number; endingWeight: number; fatGained: number; endingBodyFatPercent: number; } | 0  => {
 
     if (
     desiredMuscleGain < 0 ||

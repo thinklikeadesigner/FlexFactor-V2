@@ -5,8 +5,9 @@
 
 	let { currentWeight, bf, desiredMuscleGain, pRatio } = $UserStore;
 
-	const bodyComposition = calculateBodyComposition(pRatio, desiredMuscleGain, currentWeight, bf);
+	const { totalWeightGain, endingWeight, fatGained, endingBodyFatPercent } = calculateBodyComposition(pRatio, desiredMuscleGain, currentWeight, bf);
 
-  console.table(bodyComposition)
+  console.table({totalWeightGain, endingWeight, fatGained, endingBodyFatPercent})
+  
 </script>
 
