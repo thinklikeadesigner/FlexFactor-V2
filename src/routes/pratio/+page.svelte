@@ -32,7 +32,7 @@
 	$: pRatio = determinePRatio(sex, calorieSurplus, bodyFat, fitnessLevel);
 </script>
 
-<pre>{$UserStore.weight}</pre>
+<pre>{$UserStore.currentWeight}</pre>
 
 <form action="">
 	<h2 >Calculate p-ratio</h2>

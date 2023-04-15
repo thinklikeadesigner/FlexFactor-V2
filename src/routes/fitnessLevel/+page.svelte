@@ -1,7 +1,7 @@
 <script lang="ts">
 	// import { enhance, type SubmitFunction } from '$app/forms';
 	import BodyComposition from '$lib/components/BodyComposition.svelte';
-	import type { ActionData, PageData } from './$types';
+	import type { PageData } from './$types';
 
 	// export let data: PageData;
 	// export let form: ActionData;
