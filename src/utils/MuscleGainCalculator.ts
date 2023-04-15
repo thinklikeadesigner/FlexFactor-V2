@@ -32,13 +32,15 @@ export const calculateTimeToGains = (
 	fitnessLevel: string,
 	desiredGains: number
 ): number[] => {
-	if(startingWeight < 80) return [0, 0]
+	if (startingWeight < 80) return [0, 0];
 	const gainRates = muscleGainRatePercentage[sex][fitnessLevel];
 	const monthlyGainRates = gainRates.map((rate) => calculateMonthlyGains(startingWeight, rate));
-	
+
 	// Time to gains is returned in array in the format [worstCaseScenario, bestCaseScenario]
-	const timeToGainsInWeeks = monthlyGainRates.map((monthlyGainRate) => Math.round(desiredGains / monthlyGainRate));
-	
+	const timeToGainsInWeeks = monthlyGainRates.map((monthlyGainRate) =>
+		Math.round(desiredGains / monthlyGainRate)
+	);
+
 	// Returning the array in a more usable format.
 	return timeToGainsInWeeks.reverse();
 };
