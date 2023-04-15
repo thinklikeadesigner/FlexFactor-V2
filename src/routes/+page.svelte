@@ -3,31 +3,29 @@
 	import { getFitnessLevel } from '../utils/FitnessLevel';
 	import UserStore from '../stores/UserStore';
 
-	let name: string;
-	let age: number;
-	let sex: string = 'male';
-	let currentWeight: number;
-	let heightInInches: number = 60;
-	let exerciseName: string = 'benchPress';
-	let oneRepMax: number;
-	$: fitnessLevel = '';
+	let sex: string = $UserStore.sex;
 
 	const handleSubmit = () => {
-		if (!name || !age || !currentWeight || !oneRepMax) return;
-		fitnessLevel = getFitnessLevel(sex, exerciseName, currentWeight, oneRepMax);
-		console.log({ name, age, sex, currentWeight, exerciseName, oneRepMax, fitnessLevel });
-		console.log(fitnessLevel);
+		$UserStore.fitnessLevel = fitnessLevel;
+		console.log($UserStore.fitnessLevel);
 	};
 
 	const toggleSex = () => {
 		if (sex === 'male') {
 			sex = 'female';
+			$UserStore.sex = sex;
 		} else if (sex === 'female') {
 			sex = 'male';
+			$UserStore.sex = sex;
 		}
 	};
-
-	$: heightInFeetInches = convertInchestoFeet(heightInInches);
+	$: fitnessLevel = getFitnessLevel(
+		$UserStore.sex,
+		$UserStore.exerciseName,
+		$UserStore.currentWeight,
+		$UserStore.oneRepMax
+	);
+	$: heightInFeetInches = convertInchestoFeet($UserStore.heightInInches);
 
 	const convertInchestoFeet = (heightInInches: number) => {
 		if (heightInInches < 48) return;
@@ -49,7 +47,7 @@
 		<input
 			type="number"
 			id="age"
-			bind:value={age}
+			bind:value={$UserStore.age}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -67,7 +65,7 @@
 		<input
 			type="number"
 			id="weight"
-			bind:value={currentWeight}
+			bind:value={$UserStore.currentWeight}
 			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -78,7 +76,7 @@
 		<div class="w-3/5 self-left">
 			<RangeSlider
 				name="height"
-				bind:value={heightInInches}
+				bind:value={$UserStore.heightInInches}
 				min={48}
 				max={96}
 				step={1}
@@ -91,16 +89,22 @@
 
 	<h4>Let's determine your fitness level</h4>
 	<RadioGroup>
-		<RadioItem bind:group={exerciseName} name="justify" value={'benchPress'}>Bench Press</RadioItem>
-		<RadioItem bind:group={exerciseName} name="justify" value={'barbellSquat'}
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'benchPress'}
+			>Bench Press</RadioItem
+		>
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'barbellSquat'}
 			>Barbell Squat</RadioItem
 		>
-		<RadioItem bind:group={exerciseName} name="justify" value={'pullups'}>Pull-ups</RadioItem>
-		<RadioItem bind:group={exerciseName} name="justify" value={'hipThrust'}>Hip Thrust</RadioItem>
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'pullups'}
+			>Pull-ups</RadioItem
+		>
+		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'hipThrust'}
+			>Hip Thrust</RadioItem
+		>
 	</RadioGroup>
 
 	<label for="age" class="flex justify-between items-center">
-		{#if exerciseName === 'pullups'}
+		{#if $UserStore.exerciseName === 'pullups'}
 			Max number of reps:
 		{:else}
 			Max weight for 1 repetition (lbs):
@@ -108,7 +112,7 @@
 		<input
 			type="number"
 			id="age"
-			bind:value={oneRepMax}
+			bind:value={$UserStore.oneRepMax}
 			class="input w-1/4 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
@@ -126,7 +130,6 @@
 		Your fitness level is {fitnessLevel.toUpperCase()}
 	{/if}
 </h4>
-<pre>{JSON.stringify($UserStore)}</pre>
 
 <style>
 </style>

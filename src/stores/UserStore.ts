@@ -13,7 +13,8 @@ export const UserStore = persisted('UserStore', {
 	exerciseName: 'benchPress',
 	heightInInches: 64,
 	oneRepMax: 105,
-	desiredGains: 5
+	desiredGains: 5,
+	pratio: 0.55
 });
 
 export default UserStore;
