@@ -14,7 +14,9 @@ export const UserStore = persisted('UserStore', {
 	heightInInches: 64,
 	oneRepMax: 105,
 	desiredGains: 5,
-	pratio: 0.55
+	pratio: 0.55,
+	initialLeanMass: 0,
+	initialFatMass: 0
 });
 
 export default UserStore;
