@@ -17,6 +17,7 @@ const calculateBMRWithBF1 = (
 	sex: string,
 	bf: number
 ): number => {
+	bf = bf * 0.01;
 	const leanMass = weight * (1 - bf);
 	const bmrWithoutBF = calculateBMR(weight, height, age, sex);
 	const bmrWithBF = bmrWithoutBF * (1 + 0.4 * (bf - 0.25));
@@ -64,6 +65,7 @@ const calculateMacronutrients = (
 	const fat = Math.round((tdee * 0.25) / 9);
 	const carb = Math.round((tdee - protein * 4 - fat * 9) / 4);
 	const calories = protein * 4 + carb * 4 + fat * 9;
+	console.log(bmr);
 	return { protein, fat, carb, calories };
 };
 
