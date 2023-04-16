@@ -19,7 +19,12 @@ export const UserStore = persisted('UserStore', {
 	initialLeanMass: 0,
 	initialFatMass: 0,
 	finalLeanMass: 0,
-	finalFatMass: 0
+	finalFatMass: 0,
+	protein: 101,
+	fat: 32,
+	carb: 130,
+	calories: 1700,
+	dailySurplus: 200
 });
 
 export default UserStore;

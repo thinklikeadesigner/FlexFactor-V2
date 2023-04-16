@@ -53,7 +53,6 @@ const calculateMacronutrients = (
 ): {
 	protein: number;
 	fat: number;
-
 	carb: number;
 	calories: number;
 } => {
