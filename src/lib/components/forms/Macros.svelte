@@ -6,7 +6,7 @@
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
 	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
 	import { calculateMacronutrients } from '../../../utils/NutritionCalculations';
-
+	let calorieSurplusRange = [2.5, 5, 10, 15, 25];
 	const activityLevels = [
 		'sedentary',
 		'lightlyActive',
@@ -61,7 +61,15 @@
 		$UserStore.activityLevel
 	);
 
-	$: estimatedMessage = `carbs: ${macros.carb}, protein: ${macros.protein}, fat: ${macros.fat}, calories: ${macros.calories},`;
+	$: dailySurplus = macros.calories * 0.01 * $UserStore.calorieSurplus;
+
+	$: estimatedMessage = `carbs: ${macros.carb}, protein: ${macros.protein}, fat: ${
+		macros.fat
+	}, calories: ${
+		macros.calories
+	}, daily surplus: ${dailySurplus}, calories including surplus: calories: ${
+		macros.calories + dailySurplus
+	}`;
 	$: if (!macros.protein || !macros.carb || !macros.fat || !macros.calories) {
 		estimatedMessage = 'Could not calculate estimate';
 	}
@@ -92,7 +100,6 @@
 	</RangeSlider>
 </form>
 <form>
-	<!-- calculates p-ratio -->
 	<RangeSlider
 		name="range-slider"
 		bind:value={$UserStore.initialBodyFatPercent}
@@ -105,8 +112,23 @@
 			<div class="text-xs">{$UserStore.initialBodyFatPercent} / {bodyFatMax}</div>
 		</div>
 	</RangeSlider>
-
-	<h4>Calorie Surplus:</h4>
+	<form>
+		<h4>Calorie Surplus</h4>
+		<div class="flex items-center">
+			{#each calorieSurplusRange as value}
+				<label
+					><input
+						type="radio"
+						{value}
+						bind:group={$UserStore.calorieSurplus}
+						name=""
+						id=""
+					/>{value}%</label
+				>
+			{/each}
+		</div>
+	</form>
+	<h4>Activity Level:</h4>
 	<div class="flex flex-col justify-start text-lg">
 		{#each activityLevels as value}
 			<label
