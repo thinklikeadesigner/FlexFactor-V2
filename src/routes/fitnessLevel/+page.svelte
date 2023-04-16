@@ -25,11 +25,8 @@
 
 
 <Stepper>
-	<Step> <svelte:fragment slot="header">Let's Start</svelte:fragment>
-		<GainsCalculator />
-	</Step>
 	<Step>
-		<!-- <svelte:fragment></svelte:fragment> -->
+		<svelte:fragment slot="header">Result</svelte:fragment>
 		<BodyComposition />
 
 	</Step>

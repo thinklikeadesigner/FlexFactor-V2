@@ -6,7 +6,7 @@ export const UserStore = persisted('UserStore', {
 	currentWeight: 145,
 	sex: 'female',
 	age: 29,
-	bf: 22,
+	initialBodyFat: 22,
 	activityLevel: 'sedentary',
 	fitnessLevel: 'intermediate',
 	calorieSurplus: 5,
