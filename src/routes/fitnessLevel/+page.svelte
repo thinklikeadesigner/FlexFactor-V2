@@ -1,7 +1,9 @@
 <script lang="ts">
 	// import { enhance, type SubmitFunction } from '$app/forms';
 	import BodyComposition from '$lib/components/BodyComposition.svelte';
+	import { Stepper, Step } from '@skeletonlabs/skeleton';
 	import type { PageData } from './$types';
+	import GainsCalculator from '$lib/components/gainsCalculator.svelte';
 
 	// export let data: PageData;
 	// export let form: ActionData;
@@ -22,7 +24,17 @@
 </script>
 
 
-<BodyComposition />
+<Stepper>
+	<Step> <svelte:fragment slot="header">Let's Start</svelte:fragment>
+		<GainsCalculator />
+	</Step>
+	<Step>
+		<!-- <svelte:fragment></svelte:fragment> -->
+		<BodyComposition />
+
+	</Step>
+</Stepper>
+
 
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre>
 <div class="py-10">
