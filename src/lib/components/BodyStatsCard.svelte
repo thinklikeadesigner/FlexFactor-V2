@@ -27,12 +27,12 @@
 			<p class="unstyled leading-10">
 				<span class="font-semibold">Weight: </span>{bodyWeight}lbs
 			</p>
-				<p class="unstyled leading-10">
-					<span class="font-semibold">Lean Mass: </span>{leanMass}lbs
-				</p>
-				<p class="unstyled leading-10">
-					<span class="font-semibold">Fat Mass: </span>{fatMass}lbs
-				</p>
+			<p class="unstyled leading-10">
+				<span class="font-semibold">Lean Mass: </span>{leanMass}lbs
+			</p>
+			<p class="unstyled leading-10">
+				<span class="font-semibold">Fat Mass: </span>{fatMass}lbs
+			</p>
 		</div>
 	</div>
 </div>
