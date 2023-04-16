@@ -23,15 +23,16 @@
 	// };
 </script>
 
-
 <Stepper>
 	<Step>
 		<svelte:fragment slot="header">Result</svelte:fragment>
 		<BodyComposition />
-
+	</Step>
+	<Step>
+		<svelte:fragment slot="header">Result</svelte:fragment>
+		<BodyComposition />
 	</Step>
 </Stepper>
-
 
 <!-- <pre>{JSON.stringify(data, null, 2)}</pre>
 <div class="py-10">
