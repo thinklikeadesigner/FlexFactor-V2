@@ -24,12 +24,12 @@
 	$: $UserStore.pratio = determinePRatio(
 		$UserStore.sex,
 		$UserStore.calorieSurplus,
-		$UserStore.bf,
+		$UserStore.initialBodyFatPercent,
 		$UserStore.fitnessLevel
 	);
 
-	$: $UserStore.initialLeanMass = calculateLeanMass($UserStore.currentWeight, $UserStore.bf);
-	$: $UserStore.initialFatMass = calculateFatMass($UserStore.currentWeight, $UserStore.bf);
+	$: $UserStore.initialLeanMass = calculateLeanMass($UserStore.currentWeight, $UserStore.initialBodyFatPercent);
+	$: $UserStore.initialFatMass = calculateFatMass($UserStore.currentWeight, $UserStore.initialBodyFatPercent);
 
 </script>
 
@@ -38,14 +38,14 @@
 
 	<RangeSlider
 		name="range-slider"
-		bind:value={$UserStore.bf}
+		bind:value={$UserStore.initialBodyFatPercent}
 		min={bodyFatMin}
 		max={bodyFatMax}
 		step={1}
 	>
 		<div class="flex justify-between items-center">
 			<h4>BodyFat %</h4>
-			<div class="text-xs">{$UserStore.bf} / {bodyFatMax}</div>
+			<div class="text-xs">{$UserStore.initialBodyFatPercent} / {bodyFatMax}</div>
 		</div>
 	</RangeSlider>
 
