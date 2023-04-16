@@ -1,7 +1,7 @@
 <script lang="ts">
 	import BodyComposition from '$lib/components/BodyComposition.svelte';
-	import FitnessLevel from '$lib/components/FitnessLevel.svelte';
-	import Forecast from '$lib/components/Forecast.svelte';
+	import FitnessLevel from '$lib/components/forms/FitnessLevel.svelte';
+	import Forecast from '$lib/components/forms/Forecast.svelte';
 	import { Step, Stepper } from '@skeletonlabs/skeleton';
 </script>
 
