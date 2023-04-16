@@ -3,8 +3,7 @@ import { persisted } from 'svelte-local-storage-store';
 // First param `UserStore` is the local storage key.
 // Second param is the initial value.
 export const UserStore = persisted('UserStore', {
-	height: 64,
-	currentWeight: 146,
+	currentWeight: 145,
 	sex: 'female',
 	age: 29,
 	bf: 22,
@@ -14,8 +13,8 @@ export const UserStore = persisted('UserStore', {
 	exerciseName: 'benchPress',
 	heightInInches: 64,
 	oneRepMax: 105,
-	desiredMuscleGain: 3,
-	pRatio: 0.58
+	desiredGains: 5,
+	pratio: 0.55
 });
 
 export default UserStore;
