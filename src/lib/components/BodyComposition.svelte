@@ -6,6 +6,7 @@
 		type BodyComposition
 	} from '../../utils/BodyCompositionResults';
 	import BodyStatsCard from './BodyStatsCard.svelte';
+	import { calculateTimeToGains } from '../../utils/MuscleGainTimeCalculator';
 
 	let { currentWeight, initialBodyFatPercent, desiredGains, pratio } = $UserStore;
 
@@ -25,6 +26,19 @@
 		currentWeight,
 		initialBodyFatPercent
 	) as BodyComposition;
+
+	$: timeToGains = calculateTimeToGains(
+		$UserStore.sex,
+		$UserStore.currentWeight,
+		$UserStore.fitnessLevel,
+		$UserStore.desiredGains
+	);
+	$: [minTime, maxtime] = timeToGains;
+
+	$: estimatedMessage = `You should reach your goals in ${minTime} to ${maxtime} months`;
+	$: if (!minTime || !maxtime) {
+		estimatedMessage = 'Could not calculate estimate';
+	}
 </script>
 
 <section class="w-11/12 m-auto">
@@ -98,5 +112,5 @@
 		</div>
 	</div>
 
-	<p class="unstyled mb-4 font-medium text-lg text-center">Time to gains:</p>
+	<p class="unstyled mb-4 font-medium text-lg text-center">Time to gains: {estimatedMessage}</p>
 </section>
