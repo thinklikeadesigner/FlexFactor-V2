@@ -10,6 +10,16 @@ export interface BodyComposition {
 	endingBodyFatPercent: number;
 }
 
+export const fatMass = (weight: number, bf: number) => {
+	const result = weight * (bf * 0.01);
+	return result.toFixed(2);
+};
+
+export const leanMass = (weight: number, bf: number) => {
+	const result = weight * ((100 - bf) * 0.01);
+	return result.toFixed(2);
+};
+
 export const calculateBodyComposition = (
 	pRatio: number,
 	desiredMuscleGain: number,
