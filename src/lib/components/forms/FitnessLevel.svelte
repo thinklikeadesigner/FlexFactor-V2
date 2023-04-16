@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
-	import { getFitnessLevel } from '../../utils/FitnessLevel';
-	import UserStore from '../../stores/UserStore';
+	import { getFitnessLevel } from '../../../utils/FitnessLevel';
+	import UserStore from '../../../stores/UserStore';
 
 	let sex: string = $UserStore.sex;
 

@@ -1,10 +1,10 @@
 <script>
-	import { UserStore } from './../../stores/UserStore';
+	import { UserStore } from '../../../stores/UserStore';
 	import { RangeSlider } from '@skeletonlabs/skeleton';
-	import { calculateTimeToGains } from '../../utils/MuscleGainTimeCalculator';
-	import { getFitnessLevel } from '../../utils/FitnessLevel';
-	import { determinePRatio } from '../../utils/PRatioDeterminer';
-	import { calculateFatMass, calculateLeanMass } from '../../utils/MassCalculator';
+	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
+	import { getFitnessLevel } from '../../../utils/FitnessLevel';
+	import { determinePRatio } from '../../../utils/PRatioDeterminer';
+	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
 
 	let calorieSurplusRange = [2.5, 5, 10, 15, 25];
 	let bodyFat = 10;
