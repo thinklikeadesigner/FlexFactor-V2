@@ -1,7 +1,7 @@
 <script>
 	import { UserStore } from './../../stores/UserStore';
 	import { RangeSlider } from '@skeletonlabs/skeleton';
-	import { calculateTimeToGains } from '../../utils/MuscleGainCalculator';
+	import { calculateTimeToGains } from '../../utils/MuscleGainTimeCalculator';
 	import { getFitnessLevel } from '../../utils/FitnessLevel';
 
 	let gainsMin = 1;
