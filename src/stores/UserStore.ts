@@ -6,7 +6,7 @@ export const UserStore = persisted('UserStore', {
 	currentWeight: 145,
 	sex: 'female',
 	age: 29,
-	initialBodyFat: 22,
+	initialBodyFatPercent: 22,
 	activityLevel: 'sedentary',
 	fitnessLevel: 'intermediate',
 	calorieSurplus: 5,
@@ -14,7 +14,9 @@ export const UserStore = persisted('UserStore', {
 	heightInInches: 64,
 	oneRepMax: 105,
 	desiredGains: 5,
-	pratio: 0.55
+	pratio: 0.55,
+	initialLeanMass: 0,
+	initialFatMass: 0
 });
 
 export default UserStore;
