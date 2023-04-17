@@ -48,7 +48,7 @@
 	];
 
 	$: macroCard = [
-		{ title: 'carbs', label: 'g', content: macros.carb },
+		{ title: 'carbs', label: 'g', content: macros.carbs },
 		{ title: 'protein', label: 'g', content: macros.protein },
 		{ title: 'fat', label: 'g', content: macros.fat }
 	];
@@ -61,7 +61,6 @@
 	);
 	$: [minTime, maxtime] = timeToGains;
 
-
 	$: estimatedMessage = `You should reach your goals in ${minTime} to ${maxtime} months`;
 	$: if (!minTime || !maxtime) {
 		estimatedMessage = 'Could not calculate estimate';
@@ -69,7 +68,9 @@
 </script>
 
 <section class="w-11/12 mx-auto mb-8">
-	<p class="unstyled mb-4 font-medium text-xl text-center"><span class="font-semibold">Goal:</span> Gaining {desiredGains}lbs of muscle</p>
+	<p class="unstyled mb-4 font-medium text-xl text-center">
+		<span class="font-semibold">Goal:</span> Gaining {desiredGains}lbs of muscle
+	</p>
 	<StatsCard title="Starting Stats">
 		<div slot="one">
 			<p class="unstyled text-center font-semibold mb-2">BodyFat %</p>
@@ -117,6 +118,5 @@
 		<div slot="one">
 			<p class="unstyled font-medium text-lg text-center">{estimatedMessage}</p>
 		</div>
-
 	</StatsCard>
 </section>

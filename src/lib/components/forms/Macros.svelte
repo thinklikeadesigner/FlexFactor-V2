@@ -63,7 +63,7 @@
 	$: dailySurplus = Math.round(macros.calories * 0.01 * $UserStore.calorieSurplus);
 
 	$: estimatedMacros = {
-		Carbs: `${macros.carb}g`,
+		Carbs: `${macros.carbs}g`,
 		Protein: `${macros.protein}g`,
 		Fat: `${macros.fat}g`,
 		Calories: macros.calories,
@@ -73,7 +73,7 @@
 
 	let errorMessage: string;
 
-	$: if (!macros.protein || !macros.carb || !macros.fat || !macros.calories) {
+	$: if (!macros.protein || !macros.carbs || !macros.fat || !macros.calories) {
 		errorMessage = 'Could not calculate estimate';
 	}
 </script>
