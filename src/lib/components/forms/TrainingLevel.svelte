@@ -40,7 +40,7 @@
 	<meta name="description" content="Science-based Gains Calculator" />
 </svelte:head>
 
-<form action="submit" class="flex flex-col gap-3 mt-6 mb-10 max-w-xl m-auto px-2">
+<form action="submit" class="flex flex-col gap-3 mt-6 mb-28 max-w-xl m-auto px-2">
 	<label for="age" class="flex justify-between items-center font-semibold"
 		>Age
 		<input

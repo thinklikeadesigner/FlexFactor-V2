@@ -1,11 +1,14 @@
 <script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
-	import { RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
+	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
-	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
-	import { calculateBodyComposition } from '../../../utils/BodyCompositionResults';
+	import {
+		calculateFatMass,
+		calculateFatMassWithPRatio,
+		calculateLeanMass
+	} from '../../../utils/MassCalculator';
 
 	let bodyFat = 10;
 	let bodyFatMin = 4;
@@ -43,7 +46,7 @@
 		$UserStore.sex,
 		$UserStore.exerciseName,
 		$UserStore.currentWeight,
-		$UserStore.oneRepMax 
+		$UserStore.oneRepMax
 	);
 	$: timeToGains = calculateTimeToGains(
 		$UserStore.sex,
@@ -53,13 +56,19 @@
 	);
 	$: [minTime, maxtime] = timeToGains;
 
+	$: $UserStore.finalFatMass = calculateFatMassWithPRatio(
+		$UserStore.desiredGains,
+		$UserStore.pratio
+	);
+
 	$: estimatedMessage = `You should reach your goals in about ${minTime} to ${maxtime} months`;
 	$: if (!minTime || !maxtime) {
 		estimatedMessage = 'Could not calculate estimate';
 	}
+
 </script>
 
-<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl m-auto">
+<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-28 max-w-xl m-auto">
 	<!-- calculates p-ratio -->
 	<RangeSlider
 		name="range-slider"
@@ -74,7 +83,6 @@
 		</div>
 	</RangeSlider>
 
-	
 	<!-- calculates time to gains -->
 
 	<RangeSlider
@@ -89,6 +97,8 @@
 			<p class="unstyled text-lg">{$UserStore.desiredGains}lbs</p>
 		</div>
 	</RangeSlider>
+
+	<p class="unstyled text-center text-xl my-4"><span class="font-semibold">Estimated Fat Gained: </span>{$UserStore.finalFatMass}lbs</p>
 
 	<div class="bg-white bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
 		<p class="unstyled text-xl font-semibold text-center">{estimatedMessage}</p>

@@ -51,3 +51,4 @@ export const calculateBodyComposition = (
 		endingBodyFatPercent: Math.round(endingBodyFatPercent * 100) / 100
 	};
 };
+
