@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
-	import { RangeSlider } from '@skeletonlabs/skeleton';
+	import { RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
@@ -9,6 +9,7 @@
 		calculateFatMassWithPRatio,
 		calculateLeanMass
 	} from '../../../utils/MassCalculator';
+	const calorieSurplusRange = [2.5, 5, 10, 15, 25];
 
 	let bodyFat = 10;
 	let bodyFatMin = 4;
@@ -65,10 +66,17 @@
 	$: if (!minTime || !maxtime) {
 		estimatedMessage = 'Could not calculate estimate';
 	}
-
 </script>
 
 <form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-28 max-w-xl m-auto">
+	<p class="unstyled text-lg">Increasing calorie intake by:</p>
+	<RadioGroup class="flex items-center">
+		{#each calorieSurplusRange as value}
+			<RadioItem type="radio" {value} bind:group={$UserStore.calorieSurplus} name="" id=""
+				>{value}%</RadioItem
+			>
+		{/each}
+	</RadioGroup>
 	<!-- calculates p-ratio -->
 	<RangeSlider
 		name="range-slider"
@@ -98,9 +106,10 @@
 		</div>
 	</RangeSlider>
 
-	<p class="unstyled text-center text-xl my-4"><span class="font-semibold">Estimated Fat Gained: </span>{$UserStore.finalFatMass}lbs</p>
-
-	<div class="bg-white bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
+	<p class="unstyled text-center text-sm my-4">
+		{`With ${$UserStore.desiredGains} lbs of muscle you'll gain ${$UserStore.finalFatMass} lbs of fat`}
+	</p>
+	<div class="bg-white self-center w-max bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
 		<p class="unstyled text-xl font-semibold text-center">{estimatedMessage}</p>
 	</div>
 </form>
