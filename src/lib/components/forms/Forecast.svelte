@@ -1,11 +1,10 @@
 <script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
-	import { RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
+	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
-	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
-	import { calculateBodyComposition } from '../../../utils/BodyCompositionResults';
+	import { calculateFatMass, calculateFatMassWithPRatio, calculateLeanMass } from '../../../utils/MassCalculator';
 
 	let bodyFat = 10;
 	let bodyFatMin = 4;
@@ -53,10 +52,14 @@
 	);
 	$: [minTime, maxtime] = timeToGains;
 
+	$: $UserStore.finalFatMass = Math.round(calculateFatMassWithPRatio($UserStore.desiredGains, $UserStore.pratio))
+
 	$: estimatedMessage = `You should reach your goals in about ${minTime} to ${maxtime} months`;
 	$: if (!minTime || !maxtime) {
 		estimatedMessage = 'Could not calculate estimate';
 	}
+
+	$: console.log($UserStore.pratio, $UserStore.fitnessLevel)
 </script>
 
 <form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl m-auto">
@@ -89,6 +92,8 @@
 			<p class="unstyled text-lg">{$UserStore.desiredGains}lbs</p>
 		</div>
 	</RangeSlider>
+
+	<p>Estimated Fat Gained: {$UserStore.finalFatMass}</p>
 
 	<div class="bg-white bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
 		<p class="unstyled text-xl font-semibold text-center">{estimatedMessage}</p>

@@ -9,3 +9,6 @@ export const calculateLeanMass = (weightInLbs: number, bodyFatPercent: number) =
 	return weightInLbs * (1 - bodyFatPercent * PERCENT_TO_DECIMAL);
 };
 
+export const calculateFatMassWithPRatio = (desiredMuscleGain: number, pRatio: number) =>{
+	return desiredMuscleGain/pRatio - desiredMuscleGain
+}
