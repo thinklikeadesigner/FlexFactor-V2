@@ -6,7 +6,6 @@ interface MuscleGainRate {
 }
 
 const PERCENT_TO_DECIMAL = 0.01;
-const ONE_MONTH_IN_WEEKS = 4.345;
 
 const muscleGainRatePercentage: MuscleGainRate = {
 	male: {

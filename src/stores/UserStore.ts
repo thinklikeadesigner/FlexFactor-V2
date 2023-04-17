@@ -4,6 +4,7 @@ import { persisted } from 'svelte-local-storage-store';
 // Second param is the initial value.
 export const UserStore = persisted('UserStore', {
 	currentWeight: 145,
+	finalWeight: 149,
 	sex: 'female',
 	age: 29,
 	initialBodyFatPercent: 22,
@@ -16,7 +17,14 @@ export const UserStore = persisted('UserStore', {
 	desiredGains: 5,
 	pratio: 0.55,
 	initialLeanMass: 0,
-	initialFatMass: 0
+	initialFatMass: 0,
+	finalLeanMass: 0,
+	finalFatMass: 0,
+	protein: 101,
+	fat: 32,
+	carb: 130,
+	calories: 1700,
+	dailySurplus: 200
 });
 
 export default UserStore;
