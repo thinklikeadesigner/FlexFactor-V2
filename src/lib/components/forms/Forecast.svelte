@@ -1,6 +1,6 @@
 <script>
 	import { UserStore } from '../../../stores/UserStore';
-	import { RangeSlider } from '@skeletonlabs/skeleton';
+	import { RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
@@ -53,13 +53,13 @@
 	);
 	$: [minTime, maxtime] = timeToGains;
 
-	$: estimatedMessage = `You should reach your goals in ${minTime} to ${maxtime} months`;
+	$: estimatedMessage = `You should reach your goals in about ${minTime} to ${maxtime} months`;
 	$: if (!minTime || !maxtime) {
 		estimatedMessage = 'Could not calculate estimate';
 	}
 </script>
 
-<form>
+<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl">
 	<!-- calculates p-ratio -->
 	<RangeSlider
 		name="range-slider"
@@ -68,51 +68,22 @@
 		max={bodyFatMax}
 		step={1}
 	>
-		<div class="flex justify-between items-center">
-			<h4>BodyFat %</h4>
-			<div class="text-xs">{$UserStore.initialBodyFatPercent} / {bodyFatMax}</div>
+		<div class="flex justify-between items-center ">
+			<p class="unstyled text-xl font-semibold">Current BodyFat %:</p>
+			<p class="unstyled text-base">{$UserStore.initialBodyFatPercent} / {bodyFatMax}</p>
 		</div>
 	</RangeSlider>
 
-	<h4>Calorie Surplus</h4>
-	<div class="flex items-center">
+	<p class="unstyled text-lg">Increasing calorie intake by:</p>
+	<RadioGroup class="flex items-center">
 		{#each calorieSurplusRange as value}
-			<label
-				><input
-					type="radio"
-					{value}
-					bind:group={$UserStore.calorieSurplus}
-					name=""
-					id=""
-				/>{value}%</label
+			<RadioItem type="radio" {value} bind:group={$UserStore.calorieSurplus} name="" id=""
+				>{value}%</RadioItem
 			>
 		{/each}
-	</div>
-</form>
-<!-- calculates time to gains -->
-<form action="">
-	<RangeSlider
-		name="range-slider"
-		bind:value={$UserStore.currentWeight}
-		min={80}
-		max={300}
-		step={1}
-	>
-		<div class="flex justify-between items-center">
-			<h4>
-				Current Weight <span
-					><input
-						type="number"
-						bind:value={$UserStore.currentWeight}
-						min={80}
-						name="weight"
-						class="text-black"
-					/></span
-				> lbs
-			</h4>
-			<div class="text-xs">{$UserStore.currentWeight} / {300}</div>
-		</div>
-	</RangeSlider>
+	</RadioGroup>
+	<!-- calculates time to gains -->
+
 	<RangeSlider
 		name="range-slider"
 		bind:value={$UserStore.desiredGains}
@@ -121,12 +92,12 @@
 		step={1}
 	>
 		<div class="flex justify-between items-center">
-			<h4>Desired Gains</h4>
-			<div class="text-xs">{$UserStore.desiredGains} / {gainsMax}</div>
+			<p class="unstyled text-lg">Muscle mass you want to gain:</p>
+			<p class="unstyled text-lg">{$UserStore.desiredGains}lbs</p>
 		</div>
 	</RangeSlider>
 
-	<div class="gains-output bg-white text-black p-5 my-5 rounded-3xl">
-		<h4>{estimatedMessage}</h4>
+	<div class="bg-white bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
+		<p class="unstyled text-xl font-semibold text-center">{estimatedMessage}</p>
 	</div>
 </form>

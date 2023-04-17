@@ -5,10 +5,6 @@
 
 	let sex: string = $UserStore.sex;
 
-	const handleSubmit = () => {
-		$UserStore.fitnessLevel = fitnessLevel;
-	};
-
 	const toggleSex = () => {
 		if (sex === 'male') {
 			sex = 'female';
@@ -18,7 +14,7 @@
 			$UserStore.sex = sex;
 		}
 	};
-	$: fitnessLevel = getFitnessLevel(
+	$: $UserStore.fitnessLevel = getFitnessLevel(
 		$UserStore.sex,
 		$UserStore.exerciseName,
 		$UserStore.currentWeight,
@@ -33,6 +29,14 @@
 	};
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
+
+	const activityLevels = {
+		sedentary: 'Sedentary',
+		lightlyActive: 'Light',
+		moderatelyActive: 'Moderate',
+		veryActive: 'High',
+		extraActive: 'Extreme'
+	};
 </script>
 
 <svelte:head>
@@ -40,37 +44,37 @@
 	<meta name="description" content="Science-based Gains Calculator" />
 </svelte:head>
 
-<form on:submit|preventDefault={handleSubmit} class="flex flex-col gap-3 mt-12 max-w-xl m-auto">
-	<label for="age" class="flex justify-between items-center"
+<form action="submit" class="flex flex-col gap-3 mt-6 mb-10 max-w-xl m-auto px-2">
+	<label for="age" class="flex justify-between items-center font-semibold"
 		>Age
 		<input
 			type="number"
 			id="age"
 			bind:value={$UserStore.age}
-			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
 	</label>
 
-	<label for="sex" class="flex justify-between items-center"
+	<label for="sex" class="flex justify-between items-center font-semibold"
 		>Sex
-		<div class="w-3/5">
+		<div class="w-2/5">
 			<SlideToggle name="sex" on:change={toggleSex}>{sexLabel}</SlideToggle>
 		</div></label
 	>
 
-	<label for="weight" class="flex justify-between items-center"
+	<label for="weight" class="flex justify-between items-center font-semibold"
 		>Current Weight (lbs)
 		<input
 			type="number"
 			id="weight"
 			bind:value={$UserStore.currentWeight}
-			class="input w-3/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
 			required
 		/>
 	</label>
 
-	<label for="height" class="flex justify-between items-center"
+	<label for="height" class="flex justify-between items-center font-semibold"
 		>Height
 		<div class="w-3/5 self-left">
 			<RangeSlider
@@ -81,13 +85,13 @@
 				step={1}
 				class="w-auto"
 			>
-				<div class="text-sm">{heightInFeetInches}</div>
+				<p class="unstyled font-light text-center">{heightInFeetInches}</p>
 			</RangeSlider>
 		</div>
 	</label>
 
-	<h4>Let's determine your fitness level</h4>
-	<RadioGroup>
+	<p class="font-semibold">Select exercise for One Rep Max (1RM):</p>
+	<RadioGroup >
 		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'benchPress'}
 			>Bench Press</RadioItem
 		>
@@ -117,15 +121,10 @@
 		/>
 	</label>
 
-	<button type="submit" class="btn variant-filled px-8 w-auto mt-8 self-center"
-		>Check My Fitness Level</button
-	>
+	<p class="font-semibold">Select your activity level:</p>
+	<RadioGroup display="flex-col" class="w-1/2 m-auto">
+		{#each Object.entries(activityLevels) as [value, name]}
+			<RadioItem {value} bind:group={$UserStore.activityLevel} {name}>{name}</RadioItem>
+		{/each}
+	</RadioGroup>
 </form>
-
-<h4 class="text-center">
-	{#if fitnessLevel === 'invalid weight'}
-		Your fitness level cannot be determined
-	{:else if fitnessLevel !== ''}
-		Your fitness level is {fitnessLevel.toUpperCase()}
-	{/if}
-</h4>
