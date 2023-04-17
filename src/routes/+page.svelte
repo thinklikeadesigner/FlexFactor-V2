@@ -11,10 +11,12 @@
 		trainingLevelLocked = true;
 	} else trainingLevelLocked = false;
 
-
+	function onCompleteHandler(e: Event): void {
+		window.location.href = '/';
+	}
 </script>
 
-<Stepper >
+<Stepper <Stepper on:complete={onCompleteHandler}>
 	<Step locked={trainingLevelLocked} buttonNextType="submit">
 		<svelte:fragment slot="header">Training Level</svelte:fragment>
 		<FitnessLevel />
