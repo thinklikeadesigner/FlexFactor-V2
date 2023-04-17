@@ -31,13 +31,7 @@
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
 
-	const activityLevels = {
-		sedentary: 'Sedentary',
-		lightlyActive: 'Light',
-		moderatelyActive: 'Moderate',
-		veryActive: 'High',
-		extraActive: 'Extreme'
-	};
+	
 
 </script>
 
@@ -134,10 +128,5 @@
 		/>
 	</label>
 
-	<p class="font-semibold">Select your activity level:</p>
-	<RadioGroup display="flex-col" class="w-1/2 m-auto">
-		{#each Object.entries(activityLevels) as [value, name]}
-			<RadioItem {value} bind:group={$UserStore.activityLevel} {name}>{name}</RadioItem>
-		{/each}
-	</RadioGroup>
+	
 </form>

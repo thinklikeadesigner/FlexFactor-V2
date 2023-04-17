@@ -61,6 +61,7 @@
 	);
 	$: [minTime, maxtime] = timeToGains;
 
+
 	$: estimatedMessage = `You should reach your goals in ${minTime} to ${maxtime} months`;
 	$: if (!minTime || !maxtime) {
 		estimatedMessage = 'Could not calculate estimate';
