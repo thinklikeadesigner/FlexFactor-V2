@@ -1,12 +1,9 @@
 <script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
-	import { RangeSlider } from '@skeletonlabs/skeleton';
-	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
 	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
 	import { calculateMacronutrients } from '../../../utils/NutritionCalculations';
-	let calorieSurplusRange = [2.5, 5, 10, 15, 25];
 
 	let bodyFat = 10;
 	let bodyFatMin = 4;
@@ -70,14 +67,18 @@
 		errorMessage = 'Could not calculate estimate';
 	}
 </script>
-<section class="px-4">
-{#if errorMessage}
-	<p class="unstyled text-xl">{errorMessage}</p>
-{:else}
-	<div class="bg-white bg-opacity-10 mt-8 mb-28 rounded-2xl max-w-md p-4">
-		{#each Object.entries(estimatedMacros) as [name, amount]}
-			<p class="unstyled text-xl mb-2"><span class="font-bold pr-3">{name}:</span>{amount}</p>
-		{/each}
-	</div>
-{/if}
+
+<section class="px-4 pt-8 pb-28">
+	{#if errorMessage}
+		<p class="unstyled text-xl">{errorMessage}</p>
+	{:else}
+		<p class="unstyled max-w-md text-center py-4 font-semibold text-lg">
+			For this bulk, you should consume:
+		</p>
+		<div class="bg-white bg-opacity-10 m-auto rounded-2xl max-w-md  p-4">
+			{#each Object.entries(estimatedMacros) as [name, amount]}
+				<p class="unstyled text-xl mb-2"><span class="font-bold pr-3">{name}:</span>{amount}</p>
+			{/each}
+		</div>
+	{/if}
 </section>

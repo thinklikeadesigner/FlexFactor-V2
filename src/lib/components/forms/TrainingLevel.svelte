@@ -2,6 +2,7 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
+	import { to_number } from 'svelte/internal';
 
 	let sex: string = $UserStore.sex;
 
@@ -37,6 +38,7 @@
 		veryActive: 'High',
 		extraActive: 'Extreme'
 	};
+
 </script>
 
 <svelte:head>
@@ -50,8 +52,13 @@
 		<input
 			type="number"
 			id="age"
+			min={16}
+			max={65}
 			bind:value={$UserStore.age}
-			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.age <
+				16 || $UserStore.age > 65
+				? 'input-error'
+				: ''}"
 			required
 		/>
 	</label>
@@ -69,7 +76,10 @@
 			type="number"
 			id="weight"
 			bind:value={$UserStore.currentWeight}
-			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.currentWeight <
+				80 || $UserStore.currentWeight > 350
+				? 'input-error'
+				: ''}"
 			required
 		/>
 	</label>
@@ -91,7 +101,7 @@
 	</label>
 
 	<p class="font-semibold">Select exercise for One Rep Max (1RM):</p>
-	<RadioGroup >
+	<RadioGroup>
 		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'benchPress'}
 			>Bench Press</RadioItem
 		>
@@ -116,7 +126,10 @@
 			type="number"
 			id="age"
 			bind:value={$UserStore.oneRepMax}
-			class="input w-1/4 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+			class="input w-1/4 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.oneRepMax <
+			1
+				? 'input-error'
+				: ''}"
 			required
 		/>
 	</label>

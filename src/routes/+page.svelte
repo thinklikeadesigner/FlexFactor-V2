@@ -7,17 +7,24 @@
 	import UserStore from '../stores/UserStore';
 
 	let trainingLevelLocked = false;
-	$: if (!$UserStore.age || !$UserStore.currentWeight || !$UserStore.oneRepMax) {
+
+	$: validUserAge = $UserStore.age && $UserStore.age >= 16 && $UserStore.age <= 65;
+	$: validUserWeight =
+		$UserStore.currentWeight && $UserStore.currentWeight >= 80 && $UserStore.currentWeight <= 350;
+	$: validUser1MR = $UserStore.oneRepMax && $UserStore.oneRepMax > 0;
+
+	$: if (!validUserAge || !validUserWeight || !validUser1MR) {
 		trainingLevelLocked = true;
 	} else trainingLevelLocked = false;
 
 	function onCompleteHandler(e: Event): void {
 		window.location.href = '/';
+		
 	}
 </script>
 
-<Stepper <Stepper on:complete={onCompleteHandler}>
-	<Step locked={trainingLevelLocked} buttonNextType="submit">
+<Stepper on:complete={onCompleteHandler}>
+	<Step locked={trainingLevelLocked}>
 		<svelte:fragment slot="header">Training Level</svelte:fragment>
 		<FitnessLevel />
 	</Step>
@@ -29,8 +36,8 @@
 		<svelte:fragment slot="header">Recommended Macro Intake</svelte:fragment>
 		<Macros />
 	</Step>
-	<Step>
-		<svelte:fragment slot="header">Result</svelte:fragment>
+	<Step buttonCompleteLabel="Start Over">
+		<svelte:fragment slot="header">Body Composition Result</svelte:fragment>
 		<BodyComposition />
 	</Step>
 </Stepper>

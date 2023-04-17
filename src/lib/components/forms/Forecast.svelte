@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
 	import { RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
@@ -43,7 +43,7 @@
 		$UserStore.sex,
 		$UserStore.exerciseName,
 		$UserStore.currentWeight,
-		$UserStore.oneRepMax
+		$UserStore.oneRepMax 
 	);
 	$: timeToGains = calculateTimeToGains(
 		$UserStore.sex,
@@ -59,7 +59,7 @@
 	}
 </script>
 
-<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl">
+<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl m-auto">
 	<!-- calculates p-ratio -->
 	<RangeSlider
 		name="range-slider"
