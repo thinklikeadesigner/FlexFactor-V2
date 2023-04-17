@@ -117,7 +117,7 @@
 	<p class="unstyled mb-4 font-medium text-lg text-center">
 		Eat an additional {dailySurplus} calories
 	</p>
-	<StatsCard title=" Macros">
+	<!-- <StatsCard title=" Macros">
 		<div slot="two">
 			{#each macroCard as item}
 				<p class="unstyled leading-10">
@@ -125,6 +125,6 @@
 				</p>
 			{/each}
 		</div>
-	</StatsCard>
+	</StatsCard> -->
 	<p class="unstyled mb-4 font-medium text-lg text-center">Time to gains: {estimatedMessage}</p>
 </section>
