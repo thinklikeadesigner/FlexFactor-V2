@@ -24,7 +24,7 @@
 </script>
 
 <Stepper on:complete={onCompleteHandler}>
-	<Step locked={trainingLevelLocked} buttonNextType="submit">
+	<Step locked={trainingLevelLocked}>
 		<svelte:fragment slot="header">Training Level</svelte:fragment>
 		<FitnessLevel />
 	</Step>
