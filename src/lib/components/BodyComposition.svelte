@@ -113,10 +113,10 @@
 			{/each}
 		</div>
 	</StatsCard>
-	<h2 class="mb-4">Nutrition Recommendations</h2>
+	<!-- <h2 class="mb-4">Nutrition Recommendations</h2>
 	<p class="unstyled mb-4 font-medium text-lg text-center">
 		Eat an additional {dailySurplus} calories
-	</p>
+	</p> -->
 	<!-- <StatsCard title=" Macros">
 		<div slot="two">
 			{#each macroCard as item}
