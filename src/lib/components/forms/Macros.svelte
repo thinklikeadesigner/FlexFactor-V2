@@ -70,11 +70,12 @@
 		errorMessage = 'Could not calculate estimate';
 	}
 </script>
-<section class="px-4">
+<section class="px-4 pt-8 pb-28">
 {#if errorMessage}
 	<p class="unstyled text-xl">{errorMessage}</p>
-{:else}
-	<div class="bg-white bg-opacity-10 mt-8 mb-28 rounded-2xl max-w-md p-4">
+	{:else}
+	<p class="unstyled max-w-md text-center py-4 font-semibold text-lg">For this bulk, you should consume:</p>
+	<div class="bg-white bg-opacity-10 m-auto rounded-2xl max-w-md  p-4">
 		{#each Object.entries(estimatedMacros) as [name, amount]}
 			<p class="unstyled text-xl mb-2"><span class="font-bold pr-3">{name}:</span>{amount}</p>
 		{/each}

@@ -1,5 +1,7 @@
 import stats, { type Section } from './stats';
 
+
+
 const checkWeightClass = (weight: number): number => {
 	let weightClass;
 	if (weight < 125) {

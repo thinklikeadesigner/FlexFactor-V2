@@ -59,7 +59,7 @@
 	}
 </script>
 
-<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl">
+<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-8 max-w-xl m-auto">
 	<!-- calculates p-ratio -->
 	<RangeSlider
 		name="range-slider"
