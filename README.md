@@ -12,7 +12,7 @@ Welcome to FlexFactor - the ultimate bulking calculator app! Our muscle growth f
 
 # [slide deck](https://docs.google.com/presentation/d/1SKfx0ldEzPajMJUfayeOjLE0ILv2EnPhnsR_9pW03K0/edit#slide=id.g22e0d571bff_2_3)
 # [live site](https://flex-factor.vercel.app/)
-# [video presentation]()
+<!-- # [video presentation]() -->
 # [video demo](https://www.youtube.com/watch?v=XRSCe-35AnI)
 
 
