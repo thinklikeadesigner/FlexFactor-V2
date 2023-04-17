@@ -18,8 +18,8 @@
 	$: $UserStore.fitnessLevel = getFitnessLevel(
 		$UserStore.sex,
 		$UserStore.exerciseName,
-		$UserStore.currentWeight as number,
-		$UserStore.oneRepMax as number
+		$UserStore.currentWeight,
+		$UserStore.oneRepMax
 	);
 	$: heightInFeetInches = convertInchestoFeet($UserStore.heightInInches);
 
