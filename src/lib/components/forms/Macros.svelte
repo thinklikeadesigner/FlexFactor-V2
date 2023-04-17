@@ -70,7 +70,7 @@
 		errorMessage = 'Could not calculate estimate';
 	}
 </script>
-
+<section class="px-4">
 {#if errorMessage}
 	<p class="unstyled text-xl">{errorMessage}</p>
 {:else}
@@ -80,3 +80,4 @@
 		{/each}
 	</div>
 {/if}
+</section>
