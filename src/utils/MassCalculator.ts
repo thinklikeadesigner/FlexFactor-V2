@@ -10,5 +10,5 @@ export const calculateLeanMass = (weightInLbs: number, bodyFatPercent: number) =
 };
 
 export const calculateFatMassWithPRatio = (desiredMuscleGain: number, pRatio: number) =>{
-	return desiredMuscleGain/pRatio - desiredMuscleGain
+	return Math.round((desiredMuscleGain/pRatio - desiredMuscleGain) * 100)/100
 }
