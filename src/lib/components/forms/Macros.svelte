@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
 	import { RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
@@ -7,18 +7,10 @@
 	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
 	import { calculateMacronutrients } from '../../../utils/NutritionCalculations';
 	let calorieSurplusRange = [2.5, 5, 10, 15, 25];
-	const activityLevels = [
-		'sedentary',
-		'lightlyActive',
-		'moderatelyActive',
-		'veryActive',
-		'extraActive'
-	];
+
 	let bodyFat = 10;
 	let bodyFatMin = 4;
 	let bodyFatMax = 20;
-	let gainsMin = 1;
-	let gainsMax = 25;
 
 	$: if ($UserStore.sex === 'male') {
 		bodyFat = 10;
@@ -63,84 +55,28 @@
 
 	$: dailySurplus = macros.calories * 0.01 * $UserStore.calorieSurplus;
 
-	$: estimatedMessage = `carbs: ${macros.carb}, protein: ${macros.protein}, fat: ${
-		macros.fat
-	}, calories: ${
-		macros.calories
-	}, daily surplus: ${dailySurplus}, calories including surplus: calories: ${
-		macros.calories + dailySurplus
-	}`;
+	$: estimatedMacros = {
+		Carbs: `${macros.carb}g`,
+		Protein: `${macros.protein}g`,
+		Fat: `${macros.fat}g`,
+		Calories: macros.calories,
+		'Daily Surplus': dailySurplus,
+		'New Total Calories': macros.calories + dailySurplus
+	};
+
+	let errorMessage: string;
+
 	$: if (!macros.protein || !macros.carb || !macros.fat || !macros.calories) {
-		estimatedMessage = 'Could not calculate estimate';
+		errorMessage = 'Could not calculate estimate';
 	}
 </script>
 
-<form action="">
-	<RangeSlider
-		name="range-slider"
-		bind:value={$UserStore.currentWeight}
-		min={80}
-		max={300}
-		step={1}
-	>
-		<div class="flex justify-between items-center">
-			<h4>
-				Current Weight <span
-					><input
-						type="number"
-						bind:value={$UserStore.currentWeight}
-						min={80}
-						name="weight"
-						class="text-black"
-					/></span
-				> lbs
-			</h4>
-			<div class="text-xs">{$UserStore.currentWeight} / {300}</div>
-		</div>
-	</RangeSlider>
-</form>
-<form>
-	<RangeSlider
-		name="range-slider"
-		bind:value={$UserStore.initialBodyFatPercent}
-		min={bodyFatMin}
-		max={bodyFatMax}
-		step={1}
-	>
-		<div class="flex justify-between items-center">
-			<h4>BodyFat %</h4>
-			<div class="text-xs">{$UserStore.initialBodyFatPercent} / {bodyFatMax}</div>
-		</div>
-	</RangeSlider>
-	<form>
-		<h4>Calorie Surplus</h4>
-		<div class="flex items-center">
-			{#each calorieSurplusRange as value}
-				<label
-					><input
-						type="radio"
-						{value}
-						bind:group={$UserStore.calorieSurplus}
-						name=""
-						id=""
-					/>{value}%</label
-				>
-			{/each}
-		</div>
-	</form>
-	<h4>Activity Level:</h4>
-	<div class="flex flex-col justify-start text-lg">
-		{#each activityLevels as value}
-			<label
-				><input
-					type="radio"
-					{value}
-					bind:group={$UserStore.activityLevel}
-					name=""
-					id=""
-				/>{value}</label
-			>
+{#if errorMessage}
+	<p class="unstyled text-xl">{errorMessage}</p>
+{:else}
+	<div class="bg-white bg-opacity-10 mt-8 mb-28 rounded-2xl max-w-md p-4">
+		{#each Object.entries(estimatedMacros) as [name, amount]}
+			<p class="unstyled text-xl mb-2"><span class="font-bold pr-3">{name}:</span>{amount}</p>
 		{/each}
 	</div>
-	<p>{estimatedMessage}</p>
-</form>
+{/if}
