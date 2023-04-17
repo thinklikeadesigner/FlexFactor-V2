@@ -1,12 +1,11 @@
 <script lang="ts">
 	import { ProgressRadial } from '@skeletonlabs/skeleton';
-
+	export let fatLbs: string;
+	export let leanLbs: string;
 	export let bodyFat: number;
 	export let bodyWeight: number;
 	export let title: string;
 	export let colour: string;
-	export let leanMass: number | null = 100;
-	export let fatMass: number | null = 100;
 </script>
 
 <div class="bg-white bg-opacity-10 m-2 rounded-2xl max-w-md p-4">
@@ -28,10 +27,10 @@
 				<span class="font-semibold">Weight: </span>{bodyWeight}lbs
 			</p>
 			<p class="unstyled leading-10">
-				<span class="font-semibold">Lean Mass: </span>{leanMass}lbs
+				<span class="font-semibold">Lean Mass: </span>{leanLbs}lbs
 			</p>
 			<p class="unstyled leading-10">
-				<span class="font-semibold">Fat Mass: </span>{fatMass}lbs
+				<span class="font-semibold">Fat Mass: </span>{fatLbs}lbs
 			</p>
 		</div>
 	</div>
