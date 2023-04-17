@@ -8,6 +8,7 @@ export const UserStore = persisted('UserStore',{
 	sex: 'male',
 	age: 0,
 	initialBodyFatPercent: 0,
+	finalBodyFatPercent: 0,
 	activityLevel: 'sedentary',
 	fitnessLevel: 'intermediate',
 	calorieSurplus: 5,

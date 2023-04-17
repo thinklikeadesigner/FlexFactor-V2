@@ -5,8 +5,8 @@
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import { determinePRatio } from '../../../utils/PRatioDeterminer';
 	import { calculateFatMass, calculateLeanMass } from '../../../utils/MassCalculator';
+	import { calculateBodyComposition } from '../../../utils/BodyCompositionResults';
 
-	let calorieSurplusRange = [2.5, 5, 10, 15, 25];
 	let bodyFat = 10;
 	let bodyFatMin = 4;
 	let bodyFatMax = 20;
@@ -74,14 +74,7 @@
 		</div>
 	</RangeSlider>
 
-	<p class="unstyled text-lg">Increasing calorie intake by:</p>
-	<RadioGroup class="flex items-center">
-		{#each calorieSurplusRange as value}
-			<RadioItem type="radio" {value} bind:group={$UserStore.calorieSurplus} name="" id=""
-				>{value}%</RadioItem
-			>
-		{/each}
-	</RadioGroup>
+	
 	<!-- calculates time to gains -->
 
 	<RangeSlider
