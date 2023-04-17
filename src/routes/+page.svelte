@@ -19,10 +19,11 @@
 
 	function onCompleteHandler(e: Event): void {
 		window.location.href = '/';
+		
 	}
 </script>
 
-<Stepper <Stepper on:complete={onCompleteHandler}>
+<Stepper on:complete={onCompleteHandler}>
 	<Step locked={trainingLevelLocked} buttonNextType="submit">
 		<svelte:fragment slot="header">Training Level</svelte:fragment>
 		<FitnessLevel />
@@ -35,8 +36,8 @@
 		<svelte:fragment slot="header">Recommended Macro Intake</svelte:fragment>
 		<Macros />
 	</Step>
-	<Step>
-		<svelte:fragment slot="header">Result</svelte:fragment>
+	<Step buttonCompleteLabel="Start Over">
+		<svelte:fragment slot="header">Body Composition Result</svelte:fragment>
 		<BodyComposition />
 	</Step>
 </Stepper>

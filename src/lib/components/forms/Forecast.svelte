@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { UserStore } from '../../../stores/UserStore';
 	import { RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { calculateTimeToGains } from '../../../utils/MuscleGainTimeCalculator';
@@ -43,7 +43,7 @@
 		$UserStore.sex,
 		$UserStore.exerciseName,
 		$UserStore.currentWeight,
-		$UserStore.oneRepMax
+		$UserStore.oneRepMax 
 	);
 	$: timeToGains = calculateTimeToGains(
 		$UserStore.sex,

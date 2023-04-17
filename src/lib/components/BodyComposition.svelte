@@ -7,7 +7,6 @@
 	} from '../../utils/BodyCompositionResults';
 	import StatsCard from './StatsCard.svelte';
 	import { calculateTimeToGains } from '../../utils/MuscleGainTimeCalculator';
-	import { each, init } from 'svelte/internal';
 	import { calculateMacronutrients } from '../../utils/NutritionCalculations';
 
 	let { currentWeight, initialBodyFatPercent, desiredGains, pratio } = $UserStore;
@@ -37,15 +36,15 @@
 	) as BodyComposition;
 	$: dailySurplus = Number((macros.calories * 0.01 * $UserStore.calorieSurplus).toFixed(2));
 	const startCard = [
-		{ title: 'Total', label: 'lbs', content: currentWeight },
-		{ title: 'Lean', label: 'lbs', content: leanMass(currentWeight, initialBodyFatPercent) },
-		{ title: 'Fat', label: 'lbs', content: fatMass(currentWeight, initialBodyFatPercent) }
+		{ title: 'Total Weight', label: 'lbs', content: currentWeight },
+		{ title: 'Lean Mass', label: 'lbs', content: leanMass(currentWeight, initialBodyFatPercent) },
+		{ title: 'Body Fat', label: 'lbs', content: fatMass(currentWeight, initialBodyFatPercent) }
 	];
 
 	const endCard = [
-		{ title: 'Total', label: 'lbs', content: endingWeight },
-		{ title: 'Lean', label: 'lbs', content: leanMass(endingWeight, endingBodyFatPercent) },
-		{ title: 'Fat', label: 'lbs', content: fatMass(endingWeight, endingBodyFatPercent) }
+		{ title: 'Total Weight', label: 'lbs', content: endingWeight },
+		{ title: 'Lean Mass', label: 'lbs', content: leanMass(endingWeight, endingBodyFatPercent) },
+		{ title: 'Body Fat', label: 'lbs', content: fatMass(endingWeight, endingBodyFatPercent) }
 	];
 
 	$: macroCard = [
@@ -68,12 +67,11 @@
 	}
 </script>
 
-<section class="w-11/12 m-auto">
-	<h2 class="mb-4">Body Composition Results</h2>
-	<p class="unstyled mb-4 font-medium text-lg text-center">Gaining {desiredGains}lbs of muscle</p>
+<section class="w-11/12 mx-auto mb-8">
+	<p class="unstyled mb-4 font-medium text-xl text-center"><span class="font-semibold">Goal:</span> Gaining {desiredGains}lbs of muscle</p>
 	<StatsCard title="Starting Stats">
 		<div slot="one">
-			<h4>BodyFat %</h4>
+			<p class="unstyled text-center font-semibold mb-2">BodyFat %</p>
 			<ProgressRadial
 				slot="one"
 				value={initialBodyFatPercent}
@@ -92,9 +90,9 @@
 			{/each}
 		</div>
 	</StatsCard>
-	<StatsCard title="Starting Stats">
+	<StatsCard title="Ending Stats">
 		<div slot="one">
-			<h4>BodyFat %</h4>
+			<p class="unstyled text-center font-semibold mb-2">BodyFat %</p>
 			<ProgressRadial
 				value={endingBodyFatPercent}
 				width="w-24"
@@ -113,18 +111,11 @@
 			{/each}
 		</div>
 	</StatsCard>
-	<!-- <h2 class="mb-4">Nutrition Recommendations</h2>
-	<p class="unstyled mb-4 font-medium text-lg text-center">
-		Eat an additional {dailySurplus} calories
-	</p> -->
-	<!-- <StatsCard title=" Macros">
-		<div slot="two">
-			{#each macroCard as item}
-				<p class="unstyled leading-10">
-					<span class="font-semibold">{item.title}: </span>{item.content + ' ' + item.label}
-				</p>
-			{/each}
+
+	<StatsCard title="Time to Gains:">
+		<div slot="one">
+			<p class="unstyled font-medium text-lg text-center">{estimatedMessage}</p>
 		</div>
-	</StatsCard> -->
-	<p class="unstyled mb-4 font-medium text-lg text-center">Time to gains: {estimatedMessage}</p>
+
+	</StatsCard>
 </section>

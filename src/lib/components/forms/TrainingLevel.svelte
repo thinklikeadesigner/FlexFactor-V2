@@ -2,6 +2,7 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
+	import { to_number } from 'svelte/internal';
 
 	let sex: string = $UserStore.sex;
 
@@ -17,8 +18,8 @@
 	$: $UserStore.fitnessLevel = getFitnessLevel(
 		$UserStore.sex,
 		$UserStore.exerciseName,
-		$UserStore.currentWeight,
-		$UserStore.oneRepMax
+		$UserStore.currentWeight as number,
+		$UserStore.oneRepMax as number
 	);
 	$: heightInFeetInches = convertInchestoFeet($UserStore.heightInInches);
 
@@ -37,6 +38,7 @@
 		veryActive: 'High',
 		extraActive: 'Extreme'
 	};
+
 </script>
 
 <svelte:head>
