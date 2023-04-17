@@ -53,7 +53,7 @@
 		$UserStore.activityLevel
 	);
 
-	$: dailySurplus = macros.calories * 0.01 * $UserStore.calorieSurplus;
+	$: dailySurplus = Math.round(macros.calories * 0.01 * $UserStore.calorieSurplus);
 
 	$: estimatedMacros = {
 		Carbs: `${macros.carb}g`,

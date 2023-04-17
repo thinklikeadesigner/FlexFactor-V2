@@ -65,7 +65,6 @@ const calculateMacronutrients = (
 	const fat = Math.round((tdee * 0.25) / 9);
 	const carb = Math.round((tdee - protein * 4 - fat * 9) / 4);
 	const calories = protein * 4 + carb * 4 + fat * 9;
-	console.log(bmr);
 	return { protein, fat, carb, calories };
 };
 
