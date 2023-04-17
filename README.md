@@ -1,4 +1,4 @@
-<div align="center"><img src="./static/images/logo.png" width=300 alt="FlexFactor Logo"/> </div>
+<div align="center"><img src="./static/images/logo-dark.png" width=300 alt="FlexFactor Logo"/> </div>
 
 
 <div align="center">
