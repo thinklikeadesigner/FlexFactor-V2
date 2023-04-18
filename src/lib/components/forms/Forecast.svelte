@@ -109,7 +109,7 @@
 	<p class="unstyled text-center text-sm my-4">
 		{`With ${$UserStore.desiredGains} lbs of muscle you'll gain ${$UserStore.finalFatMass} lbs of fat`}
 	</p>
-	<div class="bg-white self-center w-max bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
+	<div class="bg-white self-center bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
 		<p class="unstyled text-xl font-semibold text-center">{estimatedMessage}</p>
 	</div>
 </form>
