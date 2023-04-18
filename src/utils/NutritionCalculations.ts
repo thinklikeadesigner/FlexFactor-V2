@@ -60,7 +60,7 @@ const calculateMacronutrients = (
 	const bmr = calculateBMRWithBF1(weight, height, age, sex, bf);
 	const tdee = Number(calculateTDEE(bmr, activityLevel));
 
-	const protein = Math.round(weight);
+	const protein = Math.round(weight * 0.82);
 	const fat = Math.round((tdee * 0.25) / 9);
 	const carbs = Math.round((tdee - protein * 4 - fat * 9) / 4);
 	const calories = protein * 4 + carbs * 4 + fat * 9;
