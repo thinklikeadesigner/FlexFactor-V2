@@ -30,9 +30,6 @@
 	};
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
-
-	
-
 </script>
 
 <svelte:head>
@@ -50,7 +47,8 @@
 			max={65}
 			bind:value={$UserStore.age}
 			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.age <
-				16 || $UserStore.age > 65
+				16 ||
+			($UserStore.age > 65 && $UserStore.age)
 				? 'input-error'
 				: ''}"
 			required
@@ -127,6 +125,4 @@
 			required
 		/>
 	</label>
-
-	
 </form>
