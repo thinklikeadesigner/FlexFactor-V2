@@ -68,7 +68,7 @@
 	}
 </script>
 
-<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-28 max-w-xl m-auto">
+<form class="flex flex-col justify-between gap-5 px-2 mt-6 mb-12 max-w-xl m-auto">
 	<p class="unstyled text-lg">Increasing calorie intake by:</p>
 	<RadioGroup class="flex items-center">
 		{#each calorieSurplusRange as value}
