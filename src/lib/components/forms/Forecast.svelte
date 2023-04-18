@@ -72,7 +72,7 @@
 	<p class="unstyled text-lg">Increasing calorie intake by:</p>
 	<RadioGroup class="flex items-center">
 		{#each calorieSurplusRange as value}
-			<RadioItem type="radio" {value} bind:group={$UserStore.calorieSurplus} name="" id=""
+			<RadioItem type="radio" {value} bind:group={$UserStore.calorieSurplus} padding="px-2" name={`${value}`}
 				>{value}%</RadioItem
 			>
 		{/each}
