@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
+	import { SlideToggle, RadioGroup, RadioItem, RangeSlider, popup } from '@skeletonlabs/skeleton';
+	import type { PopupSettings } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
-	import { to_number } from 'svelte/internal';
 
 	let sex: string = $UserStore.sex;
 
@@ -30,6 +30,12 @@
 	};
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
+
+	let popupSettings: PopupSettings = {
+		event: 'click',
+		target: 'oneRepMaxPopup',
+		placement: 'left'
+	};
 </script>
 
 <svelte:head>
@@ -92,7 +98,14 @@
 		</div>
 	</label>
 
-	<p class="font-semibold">Select exercise for One Rep Max (1RM):</p>
+	<p class="font-semibold flex items-center gap-3">
+		Select exercise for One Rep Max (1RM) <button
+			type="button"
+			class="h-7 w-7"
+			use:popup={popupSettings}
+			><img class="w-full h-full" src="/images/info.svg" alt="Info icon" /></button
+		>
+	</p>
 	<RadioGroup>
 		<RadioItem bind:group={$UserStore.exerciseName} name="justify" value={'benchPress'}
 			>Bench Press</RadioItem
@@ -126,3 +139,20 @@
 		/>
 	</label>
 </form>
+
+<div class="card variant-filled-tertiary-200 p-4 h-auto w-5/6" data-popup="oneRepMaxPopup">
+	<p class="mb-2">
+		Training status tells us something about how close you are to your genetic potential.
+	</p>
+
+	<p class="mb-2">
+		It is muscle-group specific. For example, your chest could be training status intermediate,
+		while your legs could still be lagging behind at training status beginner (because you never
+		trained them before).
+	</p>
+
+	<p class="mb-2">
+		Training status has multiple consequences. For example, a muscle group with higher training
+		status can recover faster and therefore be trained more often.
+	</p>
+</div>
