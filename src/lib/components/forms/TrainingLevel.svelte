@@ -2,7 +2,6 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
-	import { to_number } from 'svelte/internal';
 
 	let sex: string = $UserStore.sex;
 
