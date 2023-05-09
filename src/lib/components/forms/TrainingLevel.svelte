@@ -113,7 +113,7 @@
 				<p class="unstyled font-light text-center">
 					{$UserStore.unitSystem === 'imperial'
 						? heightInFeetInches
-						: convertInchestoCm($UserStore.heightInInches)}
+						: `${convertInchestoCm($UserStore.heightInInches)}cm`}
 				</p>
 			</RangeSlider>
 		</div>
