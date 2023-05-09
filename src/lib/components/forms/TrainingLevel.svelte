@@ -2,18 +2,35 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
+	import unitSystem from '../Header.svelte';
 
 	let sex: string = $UserStore.sex;
+
+	const ONE_INCH_IN_CM = 2.54;
+	const ONE_POUND_IN_KG = 2.205;
 
 	const toggleSex = () => {
 		if (sex === 'male') {
 			sex = 'female';
-			$UserStore.sex = sex;
 		} else if (sex === 'female') {
 			sex = 'male';
-			$UserStore.sex = sex;
 		}
+		$UserStore.sex = sex;
 	};
+
+	let weight: number | null;
+	let age: number | null;
+	let oneRepMax: number | null;
+
+	$: $UserStore.currentWeight =
+		$UserStore.unitSystem === 'imperial' ? (weight as number) : convertKgtoLbs(weight as number);
+
+	$: $UserStore.age = age as number;
+	$: $UserStore.oneRepMax = oneRepMax as number;
+
+
+	$: console.table($UserStore);
+
 	$: $UserStore.fitnessLevel = getFitnessLevel(
 		$UserStore.sex,
 		$UserStore.exerciseName,
@@ -26,6 +43,14 @@
 		if (heightInInches < 48) return;
 		if (heightInInches % 12 === 0) return `${heightInInches / 12} ft`;
 		else return `${Math.trunc(heightInInches / 12)}ft, ${heightInInches % 12}in`;
+	};
+
+	const convertInchestoCm = (heightInInches: number) => {
+		return Math.round(heightInInches * ONE_INCH_IN_CM);
+	};
+
+	const convertKgtoLbs = (weightInKg: number) => {
+		return Math.round(weightInKg * ONE_POUND_IN_KG);
 	};
 
 	$: sexLabel = `${sex.charAt(0).toUpperCase()}${sex.slice(1)}`;
@@ -62,11 +87,11 @@
 	>
 
 	<label for="weight" class="flex justify-between items-center font-semibold"
-		>Current Weight (lbs)
+		>Current Weight ({$UserStore.unitSystem === 'imperial' ? 'lbs' : 'kg'})
 		<input
 			type="number"
 			id="weight"
-			bind:value={$UserStore.currentWeight}
+			bind:value={weight}
 			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.currentWeight <
 				80 || $UserStore.currentWeight > 350
 				? 'input-error'
@@ -86,7 +111,11 @@
 				step={1}
 				class="w-auto"
 			>
-				<p class="unstyled font-light text-center">{heightInFeetInches}</p>
+				<p class="unstyled font-light text-center">
+					{$UserStore.unitSystem === 'imperial'
+						? heightInFeetInches
+						: convertInchestoCm($UserStore.heightInInches)}
+				</p>
 			</RangeSlider>
 		</div>
 	</label>

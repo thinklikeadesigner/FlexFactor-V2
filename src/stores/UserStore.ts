@@ -3,6 +3,7 @@ import { persisted } from 'svelte-local-storage-store';
 // First param `UserStore` is the local storage key.
 // Second param is the initial value.
 export const UserStore = persisted('UserStore', {
+	unitSystem: 'imperial',
 	currentWeight: 0,
 	finalWeight: 149,
 	sex: 'male',
