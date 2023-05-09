@@ -2,12 +2,11 @@
 	import { SlideToggle } from '@skeletonlabs/skeleton';
 	import UserStore from '../../stores/UserStore';
 
-	let unitSystem = 'imperial';
+
 
 	const toggleUnitSystem = () => {
-		if (unitSystem === 'imperial') unitSystem = 'metric';
-		else if (unitSystem === 'metric') unitSystem = 'imperial';
-		$UserStore.unitSystem = unitSystem
+		if ($UserStore.unitSystem === 'imperial') $UserStore.unitSystem = 'metric';
+		else if ($UserStore.unitSystem === 'metric') $UserStore.unitSystem = 'imperial';
 	};
 </script>
 
@@ -19,7 +18,7 @@
 		>Unit
 		<div class="w-1/3">
 			<SlideToggle name="sex" on:change={toggleUnitSystem}
-				>{unitSystem === 'imperial' ? `lb|ft` : `kg|cm`}</SlideToggle
+				>{$UserStore.unitSystem === 'imperial' ? `lb|ft` : `kg|cm`}</SlideToggle
 			>
 		</div></label
 	>

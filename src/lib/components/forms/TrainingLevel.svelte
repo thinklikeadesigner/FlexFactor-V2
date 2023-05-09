@@ -25,7 +25,7 @@
 	$: $UserStore.age = age as number;
 	
 
-	$: $UserStore.oneRepMax = $UserStore.unitSystem === 'imperial' && $UserStore.exerciseName !== 'pullups'? oneRepMax as number : convertKgtoLbs(oneRepMax as number);
+	$: $UserStore.oneRepMax = $UserStore.unitSystem === 'imperial' || $UserStore.exerciseName === 'pullups'? oneRepMax as number : convertKgtoLbs(oneRepMax as number);
 
 	$: console.table($UserStore);
 
