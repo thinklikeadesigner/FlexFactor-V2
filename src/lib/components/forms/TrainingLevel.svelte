@@ -2,7 +2,6 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
-	import unitSystem from '../Header.svelte';
 
 	let sex: string = $UserStore.sex;
 
@@ -20,7 +19,7 @@
 
 	let weight: number | null;
 	let age: number | null;
-	let oneRepMax: number | null;
+	let oneRepMax: number | null;;
 
 	$: $UserStore.currentWeight =
 		$UserStore.unitSystem === 'imperial' ? (weight as number) : convertKgtoLbs(weight as number);
