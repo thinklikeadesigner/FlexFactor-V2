@@ -2,7 +2,7 @@
 	import { SlideToggle, RadioGroup, RadioItem, RangeSlider } from '@skeletonlabs/skeleton';
 	import { getFitnessLevel } from '../../../utils/FitnessLevel';
 	import UserStore from '../../../stores/UserStore';
-	import { convertInchestoCm, convertKgtoLbs } from '../../../utils/unitConverters';
+	import { convertInchestoCm, convertKgtoLbs, convertLbstoKg } from '../../../utils/unitConverters';
 
 	let sex: string = $UserStore.sex;
 
@@ -15,18 +15,23 @@
 		$UserStore.sex = sex;
 	};
 
-	let weight: number | null;
-	let age: number | null;
-	let oneRepMax: number | null;
+	let weightInLbs: number = $UserStore.currentWeight;
+	let weightInKg: number = convertLbstoKg($UserStore.currentWeight);
+	let oneRepMax: number;
+
+	// Adjust imperial or metric units in UI only
+
+	console.log('Weight:', weightInLbs);
 
 	$: $UserStore.currentWeight =
-		$UserStore.unitSystem === 'imperial' ? (weight as number) : convertKgtoLbs(weight as number);
+		$UserStore.unitSystem === 'metric' ? convertKgtoLbs(weightInKg as number) : (weightInLbs as number);
 
-	$: $UserStore.age = age as number;
-	
+	$: $UserStore.oneRepMax =
+		$UserStore.unitSystem === 'imperial' || $UserStore.exerciseName === 'pullups'
+			? (oneRepMax as number)
+			: convertKgtoLbs(oneRepMax as number);
 
-	$: $UserStore.oneRepMax = $UserStore.unitSystem === 'imperial' || $UserStore.exerciseName === 'pullups'? oneRepMax as number : convertKgtoLbs(oneRepMax as number);
-
+	//
 	$: console.table($UserStore);
 
 	$: $UserStore.fitnessLevel = getFitnessLevel(
@@ -76,19 +81,35 @@
 		</div></label
 	>
 
-	<label for="weight" class="flex justify-between items-center font-semibold"
-		>Current Weight ({$UserStore.unitSystem === 'imperial' ? 'lbs' : 'kg'})
-		<input
-			type="number"
-			id="weight"
-			bind:value={weight}
-			class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.currentWeight <
-				80 || $UserStore.currentWeight > 350
-				? 'input-error'
-				: ''}"
-			required
-		/>
-	</label>
+	{#if $UserStore.unitSystem === 'imperial'}
+		<label for="weight" class="flex justify-between items-center font-semibold"
+			>Current Weight (lbs)
+			<input
+				type="number"
+				id="weight"
+				bind:value={weightInLbs}
+				class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.currentWeight <
+					80 || $UserStore.currentWeight > 350
+					? 'input-error'
+					: ''}"
+				required
+			/>
+		</label>
+	{:else}
+		<label for="weight" class="flex justify-between items-center font-semibold"
+			>Current Weight (kg)
+			<input
+				type="number"
+				id="weight"
+				bind:value={weightInKg}
+				class="input w-2/5 [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none {$UserStore.currentWeight <
+					80 || $UserStore.currentWeight > 350
+					? 'input-error'
+					: ''}"
+				required
+			/>
+		</label>
+	{/if}
 
 	<label for="height" class="flex justify-between items-center font-semibold"
 		>Height

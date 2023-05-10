@@ -9,6 +9,7 @@
 		calculateFatMassWithPRatio,
 		calculateLeanMass
 	} from '../../../utils/MassCalculator';
+	import { convertLbstoKg } from '../../../utils/unitConverters';
 	const calorieSurplusRange = [2.5, 5, 10, 15, 25];
 
 	let bodyFat = 10;
@@ -72,8 +73,12 @@
 	<p class="unstyled text-lg">Increasing calorie intake by:</p>
 	<RadioGroup class="flex items-center">
 		{#each calorieSurplusRange as value}
-			<RadioItem type="radio" {value} bind:group={$UserStore.calorieSurplus} padding="px-2" name={`${value}`}
-				>{value}%</RadioItem
+			<RadioItem
+				type="radio"
+				{value}
+				bind:group={$UserStore.calorieSurplus}
+				padding="px-2"
+				name={`${value}`}>{value}%</RadioItem
 			>
 		{/each}
 	</RadioGroup>
@@ -102,12 +107,22 @@
 	>
 		<div class="flex justify-between items-center">
 			<p class="unstyled text-lg">Muscle mass you want to gain:</p>
-			<p class="unstyled text-lg">{$UserStore.desiredGains}lbs</p>
+			<p class="unstyled text-lg">
+				{$UserStore.unitSystem === 'imperial'
+					? `${$UserStore.desiredGains}lbs`
+					: `${convertLbstoKg($UserStore.desiredGains)}kg`}
+			</p>
 		</div>
 	</RangeSlider>
 
 	<p class="unstyled text-center text-sm my-4">
-		{`With ${$UserStore.desiredGains} lbs of muscle you'll gain ${$UserStore.finalFatMass} lbs of fat`}
+		{#if $UserStore.unitSystem === 'imperial'}
+			{`With ${$UserStore.desiredGains} lbs of muscle you'll gain ${$UserStore.finalFatMass} lbs of fat`}
+		{:else}
+			{`With ${convertLbstoKg($UserStore.desiredGains)} kg of muscle you'll gain ${convertLbstoKg(
+				$UserStore.finalFatMass
+			)} kg of fat`}
+		{/if}
 	</p>
 	<div class="bg-white self-center bg-opacity-10 m-4 rounded-2xl max-w-md p-4">
 		<p class="unstyled text-xl font-semibold text-center">{estimatedMessage}</p>

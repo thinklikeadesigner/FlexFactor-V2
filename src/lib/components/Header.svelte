@@ -2,11 +2,12 @@
 	import { SlideToggle } from '@skeletonlabs/skeleton';
 	import UserStore from '../../stores/UserStore';
 
-
-
 	const toggleUnitSystem = () => {
-		if ($UserStore.unitSystem === 'imperial') $UserStore.unitSystem = 'metric';
-		else if ($UserStore.unitSystem === 'metric') $UserStore.unitSystem = 'imperial';
+		if ($UserStore.unitSystem === 'imperial') {
+			$UserStore.unitSystem = 'metric';
+		} else if ($UserStore.unitSystem === 'metric') {
+			$UserStore.unitSystem = 'imperial';
+		}
 	};
 </script>
 
